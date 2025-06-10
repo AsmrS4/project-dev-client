@@ -1,0 +1,21 @@
+@import '../../styles/';
+
+.message {
+    max-width: 576px;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+
+    @include flex-row();
+    @include flex-justify-center();
+
+    &.error {
+        background-color: $error-message;
+    }
+    &.success {
+        background-color: $success-message;
+    }
+}
