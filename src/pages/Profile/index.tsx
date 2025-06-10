@@ -18,7 +18,6 @@ const ProfilePage = () => {
     };
     return (
         <>
-            <Header />
             <section className={styles.profilePage}>
                 <div className={styles.profileContent}>
                     <div className={styles.imgWrapper}>
