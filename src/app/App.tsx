@@ -1,10 +1,28 @@
 import Login from '@pages/SignIn';
 import SignUp from '@pages/SignUp';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import PrivateRouter from './PrivateRouter';
 
 function App() {
     return (
         <>
-            <Login></Login>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<Login />} />
+                    <Route element={<PrivateRouter />}>
+                        <Route path='/profile' element={<Login />} />
+                        <Route path='/item/:id' element={<Login />} />
+                        <Route path='/cart' element={<Login />} />
+                        <Route path='/orders' element={<Login />} />
+                        <Route path='/order/:id' element={<Login />} />
+                        <Route path='/purchase' element={<Login />} />
+                    </Route>
+                    <Route path='/auth'>
+                        <Route path='/auth/sign-in' element={<Login />} />
+                        <Route path='/auth/sign-up' element={<SignUp />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
         </>
     );
 }
