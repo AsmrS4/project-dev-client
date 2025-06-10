@@ -1,0 +1,40 @@
+@import '@styles';
+
+nav.navBar {
+    @include flex-row();
+    @include flex-justify-center();
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin-top: 15px;
+
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    ul.navBar__list {
+        @include flex-row();
+        @include flex-justify-center();
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        margin: 0;
+        gap: 10px;
+
+        li.navBar__listItem {
+            font-size: 16px;
+            font-weight: 500;
+            box-sizing: border-box;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: ease-in-out 0.3s;
+            &:hover {
+                background-color: $btn-submit-color;
+                a {
+                    color: $white-color;
+                }
+            }
+        }
+    }
+}

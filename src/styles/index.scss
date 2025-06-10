@@ -40,3 +40,53 @@ a {
         color: $dark-grey-color;
     }
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+ul {
+    padding: 0;
+    li {
+        list-style-type: none;
+    }
+}
+
+section.header,
+section.footer {
+    @include flex-row();
+    @include flex-justify-center();
+    align-items: center;
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 60px;
+    max-height: 80px;
+    height: 100%;
+
+    padding: 10px;
+    background-color: $soft-light-gray-2;
+
+    a:active,
+    a {
+        color: #666;
+        transition: ease-in-out 0.3s;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: none;
+            color: $dark-grey-color;
+        }
+    }
+}
+
+section.header {
+    border-bottom: 1px solid $soft-light-gray;
+}
+
+section.footer {
+    border-top: 1px solid $soft-light-gray;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Register.module.scss';
 import Form from '@components/Form';
-import Field from '@components/Field';
+import Field from '@components/Field/Input';
 import Message from '@components/Message';
 import { emailInit, passwordInit, phoneInit, userNameInit } from './index.config';
 import { useInput } from '@hooks/useInput';
