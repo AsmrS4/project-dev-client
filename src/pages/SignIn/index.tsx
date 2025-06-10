@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Form from '@components/Form';
-import Field from '@components/Field';
+import Field from '@components/Field/Input';
 import styles from './Login.module.scss';
 import { useInput } from '@hooks/useInput';
 import Message from '@components/Message';
