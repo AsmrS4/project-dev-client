@@ -4,10 +4,10 @@ import AppLogo from '@components/Logotype';
 const Header = () => {
     return (
         <>
-            <section className='header'>
+            <header className='header'>
                 <AppLogo />
                 <Navbar isAuth={true} role='CLIENT' />
-            </section>
+            </header>
         </>
     );
 };

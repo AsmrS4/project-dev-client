@@ -1,0 +1,20 @@
+@import '@styles/index.scss';
+.homePage {
+    max-width: 1240px;
+    width: 100%;
+    height: auto;
+    padding: 60px 20px;
+    background-color: $bg-color;
+    box-sizing: border-box;
+    @include flex-row();
+    align-items: start;
+    justify-content: space-between;
+    margin: 0 auto;
+    .eventContainer {
+        @include flex-column();
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+        margin: 0 20px;
+    }
+}
