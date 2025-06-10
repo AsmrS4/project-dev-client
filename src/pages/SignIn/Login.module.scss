@@ -1,0 +1,11 @@
+@import '@styles/index.scss';
+
+.loginPage {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    @include flex-column;
+    @include flex-all-center;
+    height: 100%;
+}

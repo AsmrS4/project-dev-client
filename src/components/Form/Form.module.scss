@@ -1,0 +1,29 @@
+@import '@styles/index.scss';
+
+.form {
+    max-width: 576px;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 16px;
+
+    @include flex-column();
+    @include flex-justify-center();
+    gap: 48px;
+
+    box-shadow: 0px 0px 6px 0px rgba(34, 60, 80, 0.2);
+
+    .formTitle {
+        font-size: 32px;
+        font-weight: 700;
+        color: $dark-grey-color;
+        letter-spacing: 0.03cm;
+    }
+    .inputWrapper {
+        width: 100%;
+        @include flex-column();
+        @include flex-all-center();
+        gap: 16px;
+    }
+}
