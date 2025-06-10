@@ -5,24 +5,14 @@ import Field from '@components/Field';
 import styles from './Login.module.scss';
 import { useInput } from '@hooks/useInput';
 import Message from '@components/Message';
+import { emailInit, passwordInit } from './index.config';
+
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
 
-    const email: any = useInput({
-        initialValue: '',
-        label: 'Email',
-        type: 'text',
-        placeholder: 'user@example.com',
-        validations: { isEmailValid: true, isEmpty: true },
-    });
-
-    const password: any = useInput({
-        initialValue: '',
-        label: 'Пароль',
-        type: 'password',
-        validations: { isPasswordValid: true, minLength: 8, isEmpty: true },
-    });
+    const email: any = useInput(emailInit);
+    const password: any = useInput(passwordInit);
 
     const handleForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -45,11 +35,13 @@ const Login = () => {
         }
         setError(false);
     };
+
     return (
         <section className={styles.loginPage}>
             <Form title='Авторизация' onSubmit={handleForm}>
                 <Field {...email} />
                 <Field {...password} />
+                <a href='/auth/sign-up'>Создать аккаунт</a>
             </Form>
             <Message message={errorMessage} visible={error} type='error' />
         </section>

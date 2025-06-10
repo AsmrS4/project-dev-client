@@ -5,17 +5,21 @@
     box-sizing: border-box;
     width: 100%;
     height: auto;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 8px;
+    margin: 15px 10px;
+    padding: 15px 20px;
+    border-radius: 16px;
 
     @include flex-row();
-    @include flex-justify-center();
-
-    &.error {
-        background-color: $error-message;
+    align-items: center;
+    gap: 20px;
+    background-color: $white-color;
+    box-shadow: 0px 0px 6px 0px rgba(34, 60, 80, 0.2);
+    img {
+        width: 32px;
+        height: 32px;
     }
-    &.success {
-        background-color: $success-message;
+    p {
+        margin: 0;
+        letter-spacing: 0.03cm;
     }
 }
