@@ -1,0 +1,29 @@
+@import '@styles/index.scss';
+.filter {
+    @include flex-column();
+    align-items: start;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 16px;
+    max-width: 300px;
+    width: 100%;
+    max-height: 360px;
+    height: 100%;
+    background-color: $white-color;
+    box-shadow: 0px 0px 6px 0px rgba(34, 60, 80, 0.2);
+    gap: 18px;
+
+    .filterTitle {
+        font-size: 20px;
+        color: $dark-grey-color;
+        margin: 0 10px;
+    }
+
+    .filterFieldsWrapper {
+        @include flex-column();
+        gap: 10px;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+    }
+}

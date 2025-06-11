@@ -3,13 +3,16 @@ import SignUp from '@pages/SignUp';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PrivateRouter from './PrivateRouter';
 import ProfilePage from '@pages/Profile';
+import HomePage from '@pages/HomePage';
+import Header from '@components/Header';
 
 function App() {
     return (
         <>
             <BrowserRouter>
+                <Header />
                 <Routes>
-                    <Route path='/' element={<Login />} />
+                    <Route path='/' element={<HomePage />} />
                     {/* <Route element={<PrivateRouter />}> */}
                     <Route>
                         <Route path='/profile' element={<ProfilePage />} />
