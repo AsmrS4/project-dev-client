@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Event.module.scss';
 
 import Button from '@components/Button';
+import { DateConverter } from '@utils/converter/DateConverter';
 interface EventCardProps {
     title: string;
     description: string;
@@ -10,6 +11,7 @@ interface EventCardProps {
     image: string;
 }
 const EventCard: React.FC<EventCardProps> = ({ title, description, dateTime, id, image }) => {
+    const dateConverter: DateConverter = new DateConverter();
     return (
         <div className={styles.eventCard}>
             <div className={styles.eventImg}>
@@ -19,7 +21,7 @@ const EventCard: React.FC<EventCardProps> = ({ title, description, dateTime, id,
                 <h3>{title}</h3>
                 <p>{description}</p>
                 <div className={styles.eventFooter}>
-                    <p>Дата: {dateTime}</p>
+                    <p>Дата: {dateConverter.convertToLocaleString(dateTime)}</p>
                     <Button title={'Детали'} type='button' />
                 </div>
             </div>
