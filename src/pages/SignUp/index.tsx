@@ -86,8 +86,10 @@ const SignUp = () => {
         <section className={styles.registerPage}>
             <Form title={'Регистрация'} onSubmit={handleForm}>
                 <Field {...userName} />
-                <Field {...phoneNumber} />
-                <Field {...email} />
+                <div className='row'>
+                    <Field {...phoneNumber} />
+                    <Field {...email} />
+                </div>
                 <Field {...password} />
                 <a href='/auth/sign-in'>Войти в систему</a>
             </Form>

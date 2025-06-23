@@ -18,6 +18,15 @@ body {
     }
 }
 
+.row {
+    @media (max-width: 600px) {
+        @include flex-column;
+    }
+    @include flex-row;
+    @include flex-justify-center;
+    width: 100%;
+    gap: 10px;
+}
 body::selection {
     display: none;
 }

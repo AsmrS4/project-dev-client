@@ -7,20 +7,22 @@ import { useAppSelector } from '@hooks/useAppDispatch';
 
 const Navbar: React.FC = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { isAuth, role } = useAppSelector((state) => state.authReducer);
     const logout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         dispatch(logoutUser());
+        navigate('/auth/sign-in');
     };
     useEffect(() => {}, [role, isAuth]);
     return (
         <nav className={style.navBar}>
             <ul className={style.navBar__list}>
-                <li className={style.navBar__listItem}>
-                    <a href='/'>{'Главная'}</a>
-                </li>
                 {isAuth && (
                     <>
+                        <li className={style.navBar__listItem}>
+                            <a href='/'>{'Главная'}</a>
+                        </li>
                         {role == 'CLIENT' && (
                             <li className={style.navBar__listItem}>
                                 <a href='/tickets'>{'Билеты'}</a>

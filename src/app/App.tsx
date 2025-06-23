@@ -12,8 +12,8 @@ function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    <Route path='/' element={<HomePage />} />
                     <Route element={<PrivateRouter />}>
+                        <Route path='/' element={<HomePage />} />
                         <Route path='/profile' element={<ProfilePage />} />
                         <Route path='/item/:id' element={<Login />} />
                         <Route path='/cart' element={<Login />} />
