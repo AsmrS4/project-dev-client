@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useValidation = (value: string | number, validations: any) => {
+export const useValidation = (value: string | number | null, validations: any) => {
     const [isEmpty, setIsEmpty] = useState<boolean>(true);
     const [minLengthError, setMinLengthError] = useState<boolean>(false);
     const [emailError, setEmailError] = useState<boolean>(false);

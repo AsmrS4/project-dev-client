@@ -21,7 +21,7 @@ const passwordInit = {
     }
 
 const phoneInit = {
-        initialValue: '',
+        initialValue: null,
         label: 'Телефон',
         type: 'number',
         placeholder: '+7(xxx) xxx xx-xx',
