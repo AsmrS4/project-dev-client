@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './Navbar.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '@store/User/AuthActionCreators';
+import { useAppSelector } from '@hooks/useAppDispatch';
 
-interface NavbarProps {
-    isAuth: boolean;
-    role: 'CLIENT' | 'MANAGER' | 'SECURITY';
-}
-
-const Navbar: React.FC<NavbarProps> = ({ isAuth = false, role = 'CLIENT' }) => {
+const Navbar: React.FC = () => {
+    const dispatch = useDispatch();
+    const { isAuth, role } = useAppSelector((state) => state.authReducer);
+    const logout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        dispatch(logoutUser());
+    };
+    useEffect(() => {}, [role, isAuth]);
     return (
         <nav className={style.navBar}>
             <ul className={style.navBar__list}>
@@ -34,7 +40,13 @@ const Navbar: React.FC<NavbarProps> = ({ isAuth = false, role = 'CLIENT' }) => {
             <ul className={style.navBar__list}>
                 {isAuth ? (
                     <li className={style.navBar__listItem}>
-                        <a href='/'>{'Выйти'}</a>
+                        <a
+                            onClick={(e) => {
+                                logout(e);
+                            }}
+                        >
+                            {'Выйти'}
+                        </a>
                     </li>
                 ) : (
                     <>

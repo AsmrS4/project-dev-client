@@ -13,8 +13,7 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path='/' element={<HomePage />} />
-                    {/* <Route element={<PrivateRouter />}> */}
-                    <Route>
+                    <Route element={<PrivateRouter />}>
                         <Route path='/profile' element={<ProfilePage />} />
                         <Route path='/item/:id' element={<Login />} />
                         <Route path='/cart' element={<Login />} />
@@ -22,6 +21,7 @@ function App() {
                         <Route path='/order/:id' element={<Login />} />
                         <Route path='/purchase' element={<Login />} />
                     </Route>
+
                     <Route path='/auth'>
                         <Route path='/auth/sign-in' element={<Login />} />
                         <Route path='/auth/sign-up' element={<SignUp />} />

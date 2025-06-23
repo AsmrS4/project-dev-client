@@ -10,7 +10,7 @@ interface InputInitProps {
 }
 
 export const useInput = (props: InputInitProps) => {
-    const [value, setValue] = useState<string | number>(props.initialValue);
+    const [value, setValue] = useState<string | number >(props.initialValue);
     const label : string = props.label;
     const type : string = props.type;
     const placeholder: string = props.placeholder ?? "";
