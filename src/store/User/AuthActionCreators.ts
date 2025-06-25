@@ -2,9 +2,10 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import type { ILogin } from "src/models/Auth/Auth";
 import { clearSession, setErrorMessage, setSession } from "./AuthReducer";
+import type { Dispatch } from "@reduxjs/toolkit";
 
 
-export const authorizeUser = (payload: ILogin) => async (dispatch: any) => {
+export const authorizeUser = (payload: ILogin) => async (dispatch: Dispatch) => {
     try {
             const response = await axios({
                 url: `${"http://localhost:8090/api"}/auth/sign-in`,
@@ -27,9 +28,9 @@ export const authorizeUser = (payload: ILogin) => async (dispatch: any) => {
         }
 }
 
-export const logoutUser = () => async(dispatch: any) => {
+export const logoutUser = () => async(dispatch: Dispatch) => {
     try {
-        const response = await axios({
+        await axios({
             url:`${"http://localhost:8090/api"}/auth/sign-in`,
             method: 'POST',
             headers: {
