@@ -15,7 +15,7 @@ interface ILinkButton {
 interface IActionButton {
     title: string;
     type: 'submit' | 'button' | 'reset';
-    onClick: () => {};
+    onClick: () => void;
 }
 
 const Button = (props: ButtonProps) => {
@@ -32,7 +32,7 @@ export const ActionButton = (props: IActionButton) => {
             type={props.type}
             className={style.button}
             onClick={() => {
-                props.onClick;
+                props.onClick();
             }}
         >
             {props.title}
