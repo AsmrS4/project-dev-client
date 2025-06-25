@@ -20,8 +20,8 @@ const Login = () => {
     const email: any = useInput(emailInit);
     const password: any = useInput(passwordInit);
 
+    const dispatch: any = useDispatch();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if (isAuth) {

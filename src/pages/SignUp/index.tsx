@@ -7,10 +7,11 @@ import { emailInit, passwordInit, phoneInit, userNameInit } from './index.config
 import { useInput } from '@hooks/useInput';
 
 import type { IRegister } from 'src/models/Auth/Auth';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { authorizeUser } from '@store/User/AuthActionCreators';
 import { useNavigate } from 'react-router-dom';
+import type { Dispatch } from '@reduxjs/toolkit';
 
 const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -21,7 +22,7 @@ const SignUp = () => {
     const phoneNumber: any = useInput(phoneInit);
     const password: any = useInput(passwordInit);
 
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
     const navigate = useNavigate();
 
     const registerUser = async (payload: IRegister) => {
@@ -40,8 +41,8 @@ const SignUp = () => {
                 }),
             );
             navigate('/');
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
+        } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response && error.response.status === 400) {
                 setError(true);
                 setErrorMessage(error.response.data['error: ']);
             }
