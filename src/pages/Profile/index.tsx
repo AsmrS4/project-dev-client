@@ -26,6 +26,7 @@ const ProfilePage = () => {
         console.log('clicked');
         setIsOpen((prev) => !prev);
     };
+
     const fetchProfile = async () => {
         try {
             const response = await axios({

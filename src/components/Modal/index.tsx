@@ -7,25 +7,22 @@ import { useInput } from '@hooks/useInput';
 import { emailInit, phoneInit, userNameInit } from '@pages/SignUp/index.config';
 import type { ProfileProps } from 'src/models/Auth/Auth';
 import Message from '@components/Message';
+import axios, { AxiosError } from 'axios';
+import { useAppSelector } from '@hooks/useAppDispatch';
 
 interface ModalProps {
     title: string;
     initialState: boolean;
     initialDetails: ProfileProps;
     onClick: () => void;
-    children?: React.ReactNode;
 }
 
-const ModalComponent: React.FC<ModalProps> = ({
-    title,
-    initialState,
-    onClick,
-    initialDetails,
-    children,
-}) => {
+const ModalComponent: React.FC<ModalProps> = ({ title, initialState, onClick, initialDetails }) => {
     const [state, setState] = useState<boolean>(initialState);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [hasError, setError] = useState<boolean>(false);
+    const [isSuccess, setIsSuccess] = useState<boolean>(false);
+    const { token } = useAppSelector((state) => state.authReducer);
     const email: any = useInput(emailInit);
     const userName: any = useInput(userNameInit);
     const phoneNumber: any = useInput(phoneInit);
@@ -33,8 +30,9 @@ const ModalComponent: React.FC<ModalProps> = ({
         handleForm();
     };
     const handleCancel = () => {
-        setError(false);
         onClick();
+        setError(false);
+        setIsSuccess(false);
     };
     useEffect(() => {}, []);
     useEffect(() => {
@@ -43,9 +41,32 @@ const ModalComponent: React.FC<ModalProps> = ({
         email.setValue(initialDetails.email);
         phoneNumber.setValue(initialDetails.phoneNumber);
     }, [initialState]);
-
+    const editProfile = async () => {
+        try {
+            await axios({
+                url: `${'http://localhost:8090/api'}/user/profile`,
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                data: {
+                    email: email.value,
+                    fullName: userName.value,
+                    phoneNumber: phoneNumber.value,
+                    image: null,
+                },
+            });
+            setIsSuccess(true);
+        } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response && error.response.status == 400) {
+                setError(true);
+                setErrorMessage(error.response.data['error: ']);
+            }
+        }
+    };
     const handleForm = async () => {
         setError(false);
+        setIsSuccess(false);
         if (email.isEmpty || userName.isEmpty || phoneNumber.value == null) {
             setError(true);
             return setErrorMessage('Заполните поля');
@@ -59,6 +80,7 @@ const ModalComponent: React.FC<ModalProps> = ({
             return setErrorMessage('Некорректный формат email');
         }
         setError(false);
+        editProfile();
     };
 
     return (
@@ -77,7 +99,11 @@ const ModalComponent: React.FC<ModalProps> = ({
                     <Field {...userName} />
                     <Field {...phoneNumber} />
                     <Field {...email} />
-                    <Message message={errorMessage} type='error' visible={hasError} />
+                    <Message
+                        message={hasError ? errorMessage : 'Данные успешно обновлены'}
+                        type={hasError ? 'error' : 'success'}
+                        visible={hasError || isSuccess}
+                    />
                 </EditForm>
             </Modal>
         </>
