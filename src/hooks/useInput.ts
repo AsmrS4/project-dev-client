@@ -20,5 +20,5 @@ export const useInput = (props: InputInitProps) => {
         setValue(e.target.value);
     };
     
-    return { value, onChange, label, type, placeholder, ...valid };
+    return { value, onChange, setValue, label, type, placeholder, ...valid };
 };

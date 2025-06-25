@@ -10,3 +10,10 @@ export interface IRegister {
     phoneNumber?: string|number
 
 }
+
+export interface ProfileProps {
+    email: string;
+    fullName: string;
+    phoneNumber: string | number;
+    image: string | null;
+}

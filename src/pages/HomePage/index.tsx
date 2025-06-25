@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
     const { isAuth } = useAppSelector((state) => state.authReducer);
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
         !isAuth ? navigate('/auth/sign-in') : dispatch(fetchEvents());

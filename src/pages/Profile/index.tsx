@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
-import Form from '@components/Form';
+import Form, { EditForm } from '@components/Form';
 import TextField from '@components/Field/TextField';
 import defaultAvatar from '@assets/userAvatar.jpg';
-import Button from '@components/Button';
+import Button, { ActionButton } from '@components/Button';
 import { useAppSelector } from '@hooks/useAppDispatch';
 import axios, { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
-
-interface ProfileProps {
-    email: string;
-    fullName: string;
-    phoneNumber: string | number;
-    image: string | null;
-}
+import ModalComponent from '@components/Modal';
+import type { ProfileProps } from 'src/models/Auth/Auth';
+import Message from '@components/Message';
 
 const ProfilePage = () => {
     const { token } = useAppSelector((state) => state.authReducer);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [profile, setProfile] = useState<ProfileProps>({
         email: '',
         fullName: '',
@@ -25,6 +22,11 @@ const ProfilePage = () => {
         image: '',
     });
     const dispatch = useDispatch();
+    const handleModal = () => {
+        console.log('clicked');
+        setIsOpen((prev) => !prev);
+    };
+
     const fetchProfile = async () => {
         try {
             const response = await axios({
@@ -74,9 +76,15 @@ const ProfilePage = () => {
                     <Form title={profile.fullName} onSubmit={() => {}} readonly={true}>
                         <TextField {...email} />
                         <TextField {...phone} />
-                        <Button title='Редактировать' type='button' />
+                        <ActionButton title='Редактировать' type='button' onClick={handleModal} />
                     </Form>
                 </div>
+                <ModalComponent
+                    title='Редактирование'
+                    initialState={isOpen}
+                    initialDetails={profile}
+                    onClick={handleModal}
+                ></ModalComponent>
             </section>
         </>
     );
