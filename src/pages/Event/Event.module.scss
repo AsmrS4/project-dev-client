@@ -3,7 +3,7 @@ section.eventPage {
     max-width: 1000px;
     width: 100%;
     height: auto;
-    padding: 30px 30px;
+    padding: 30px;
     background-color: $bg-color;
     @include flex-column();
     box-sizing: border-box;

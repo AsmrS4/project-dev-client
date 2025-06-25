@@ -6,6 +6,8 @@ import ProfilePage from '@pages/Profile';
 import HomePage from '@pages/HomePage';
 import Header from '@components/Header';
 import EventPage from '@pages/Event';
+import ActiveTicketPage from '@pages/TicketPage/ActiveTicketPage';
+import ArhivedTicketPage from '@pages/TicketPage/ArchivedTicketPage';
 
 function App() {
     return (
@@ -17,10 +19,8 @@ function App() {
                     <Route element={<PrivateRouter />}>
                         <Route path='/profile' element={<ProfilePage />} />
                         <Route path='/item/:id' element={<EventPage />} />
-                        <Route path='/cart' element={<Login />} />
-                        <Route path='/orders' element={<Login />} />
-                        <Route path='/order/:id' element={<Login />} />
-                        <Route path='/purchase' element={<Login />} />
+                        <Route path='/tickets' element={<ActiveTicketPage />} />
+                        <Route path='/history/tickets' element={<ArhivedTicketPage />} />
                     </Route>
 
                     <Route path='/auth'>
