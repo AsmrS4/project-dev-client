@@ -6,7 +6,7 @@ import { logoutUser } from '@store/User/AuthActionCreators';
 import { useAppSelector } from '@hooks/useAppDispatch';
 import { Link } from 'react-router-dom';
 const Navbar: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
     const navigate = useNavigate();
     const { isAuth, role } = useAppSelector((state) => state.authReducer);
     const logout = async (e: React.MouseEvent<HTMLAnchorElement>) => {

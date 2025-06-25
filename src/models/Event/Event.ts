@@ -7,6 +7,18 @@ export interface IEventCard {
 }
 
 export interface ImageProps {
+    id: string | number,
+    imageUrl: string,
+    eventId: string| number
+}
+
+export interface IEvent {
     id: string,
-    imageUrl: string
+    images: ImageProps[],
+    title: string,
+    description: string,
+    dateTime: [],
+    createTime: [],
+    address: string,
+    status: string
 }
