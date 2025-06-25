@@ -5,7 +5,7 @@ import TextField from '@components/Field/TextField';
 import defaultAvatar from '@assets/userAvatar.jpg';
 import Button from '@components/Button';
 import { useAppSelector } from '@hooks/useAppDispatch';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
 
@@ -40,8 +40,8 @@ const ProfilePage = () => {
                 image: response.data.image,
                 phoneNumber: response.data.phoneNumber,
             });
-        } catch (error) {
-            if (error.response && error.response.status == 401) {
+        } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response && error.response.status == 401) {
                 dispatch(clearSession());
             }
         }

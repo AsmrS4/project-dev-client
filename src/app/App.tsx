@@ -5,6 +5,7 @@ import PrivateRouter from './PrivateRouter';
 import ProfilePage from '@pages/Profile';
 import HomePage from '@pages/HomePage';
 import Header from '@components/Header';
+import EventPage from '@pages/Event';
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
                     <Route path='/' element={<HomePage />} />
                     <Route element={<PrivateRouter />}>
                         <Route path='/profile' element={<ProfilePage />} />
-                        <Route path='/item/:id' element={<Login />} />
+                        <Route path='/item/:id' element={<EventPage />} />
                         <Route path='/cart' element={<Login />} />
                         <Route path='/orders' element={<Login />} />
                         <Route path='/order/:id' element={<Login />} />
