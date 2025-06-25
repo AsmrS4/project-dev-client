@@ -15,7 +15,6 @@ const EventCard: React.FC<IEventCard> = ({ title, description, dateTime, id, ima
             </div>
             <div className={styles.eventContent}>
                 <h3>{title}</h3>
-                <p>{description}</p>
                 <div className={styles.eventFooter}>
                     <p>
                         Дата:{' '}
