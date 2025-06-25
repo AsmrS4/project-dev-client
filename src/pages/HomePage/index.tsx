@@ -1,36 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './HomePage.module.scss';
 import Filter from '@components/Filter';
 import EventCard from '@components/Card/Event';
-import eventImg from '@assets/event.jpg';
-import eventImg2 from '@assets/event2.jpg';
+import { useAppSelector } from '@hooks/useAppDispatch';
+import { useDispatch } from 'react-redux';
+import { fetchEvents } from '@store/Event/EventActionCreator';
+import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
-    const events = [
-        {
-            title: 'Мероприятие 1',
-            description:
-                'Описание мероприятия: Это очень классное мероприятие. Обязательно прихродите всей семьей, мы будем вас ждать',
-            dateTime: '2025-06-10',
-            id: '1',
-            image: eventImg,
-        },
-        {
-            title: 'Мероприятие 2',
-            description:
-                'Описание мероприятия: Это очень классное мероприятие. Обязательно прихродите всей семьей, мы будем вас ждать',
-            dateTime: '2025-06-12',
-            id: '2',
-            image: eventImg2,
-        },
-        {
-            title: 'Мероприятие 2',
-            description:
-                'Описание мероприятия: Это очень классное мероприятие. Обязательно прихродите всей семьей, мы будем вас ждать',
-            dateTime: '2025-06-14',
-            id: '3',
-            image: eventImg,
-        },
-    ];
+    const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
+    const { isAuth } = useAppSelector((state) => state.authReducer);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    useEffect(() => {
+        !isAuth ? navigate('/auth/sign-in') : dispatch(fetchEvents());
+    }, [isAuth]);
     return (
         <section className={styles.homePage}>
             <div className={styles.eventContainer}>
