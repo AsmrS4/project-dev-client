@@ -11,7 +11,11 @@ export const fetchEvents = () => async(dispatch: any) => {
                     Authorization: `Bearer ${token}`
                 },
         })
-        dispatch(setEvents({isLoading: false, events: response.data}))
+        dispatch(setEvents({
+            isLoading: false, 
+            events: response.data,
+            code: null
+        }))
     } catch (error) {
         if(error instanceof AxiosError && error.response) {
             dispatch(setErrorCode(error.response.status));
