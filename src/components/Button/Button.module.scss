@@ -15,4 +15,12 @@
         background-color: $btn-submit-color;
         color: $white-color;
     }
+    &:disabled {
+        background-color: $btn-default-color;
+        color: rgb(128, 128, 128);
+        &:hover {
+            background-color: $btn-default-color;
+            color: rgb(128, 128, 128);
+        }
+    }
 }

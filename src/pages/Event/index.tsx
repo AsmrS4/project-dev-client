@@ -14,7 +14,8 @@ import { clearSession } from '@store/User/AuthReducer';
 const EventPage = () => {
     const { id } = useParams();
     const dateConverter: DateConverter = new DateConverter();
-    const { token } = useAppSelector((state) => state.authReducer);
+    const { token, role } = useAppSelector((state) => state.authReducer);
+    const [isBooked, setIsBooked] = useState<boolean>(false);
     const [eventDetails, setDetails] = useState<IEvent>({
         id: '',
         images: [],
@@ -27,6 +28,24 @@ const EventPage = () => {
     });
     const dispatch: any = useDispatch();
     const navigate: any = useNavigate();
+    const checkHasBooking = async () => {
+        try {
+            const response = await axios({
+                url: `http://localhost:8090/api/booking/check/${id}`,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setIsBooked(response.data == true);
+        } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response && error.response.status == 401) {
+                dispatch(clearSession());
+                navigate('/auth/sign-in');
+            }
+            console.log(error);
+        }
+    };
     const bookEvent = async () => {
         try {
             const response = await axios({
@@ -36,6 +55,7 @@ const EventPage = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            checkHasBooking();
         } catch (error: unknown) {
             if (error instanceof AxiosError && error.response && error.response.status == 401) {
                 dispatch(clearSession());
@@ -64,19 +84,37 @@ const EventPage = () => {
     };
     useEffect(() => {
         fetchDetails();
+        checkHasBooking();
         console.log(eventDetails);
     }, []);
     return (
         <section className={styles.eventPage}>
             <div className={styles.eventHeader}>
                 <h1>{eventDetails.title}</h1>
-                {eventDetails.status === 'ACTIVE' && (
-                    <ActionButton
-                        title={'Забронировать'}
-                        type={'submit'}
-                        onClick={bookEvent}
-                    ></ActionButton>
-                )}
+                {eventDetails.status === 'ACTIVE' &&
+                    (role === 'CLIENT' ? (
+                        <ActionButton
+                            title={isBooked ? 'Уже забронировано' : 'Забронировать'}
+                            type={'submit'}
+                            onClick={bookEvent}
+                            disabled={isBooked}
+                        ></ActionButton>
+                    ) : role === 'MANAGER' ? (
+                        <>
+                            <ActionButton
+                                title={'Редактировать'}
+                                type={'submit'}
+                                onClick={() => {}}
+                            ></ActionButton>
+                            <ActionButton
+                                title={'Отменить'}
+                                type={'submit'}
+                                onClick={() => {}}
+                            ></ActionButton>
+                        </>
+                    ) : (
+                        <></>
+                    ))}
             </div>
             <ImageCarousel images={eventDetails.images}></ImageCarousel>
             <div className={styles.eventContainer}>

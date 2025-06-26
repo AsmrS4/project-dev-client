@@ -38,7 +38,6 @@ const ActiveTicketPage = () => {
         <section className={styles.ticketPage}>
             <div className={styles.pageHeader}>
                 <h2>Активные билеты</h2>
-
                 <LinkButton href='/history/tickets' title={'Архив'} type={'submit'}></LinkButton>
             </div>
             <div className={styles.ticketContainer}>

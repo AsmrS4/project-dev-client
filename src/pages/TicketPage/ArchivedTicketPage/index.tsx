@@ -5,7 +5,7 @@ import type { TicketProps } from 'src/models/Ticket/Ticket';
 import { useAppSelector } from '@hooks/useAppDispatch';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import TicketCard from '@components/Card/Ticket';
+import { ArchivedTicketCard } from '@components/Card/Ticket';
 import axios, { AxiosError } from 'axios';
 import { clearSession } from '@store/User/AuthReducer';
 const ArhivedTicketPage = () => {
@@ -36,18 +36,18 @@ const ArhivedTicketPage = () => {
     return (
         <section className={styles.ticketPage}>
             <div className={styles.pageHeader}>
+                <h2>Архив мероприятий</h2>
                 <LinkButton href='/tickets' title={'Активные'} type={'submit'}></LinkButton>
-                <h2>Посещенные мероприятия</h2>
             </div>
             <div className={styles.ticketContainer}>
                 {tickets.map((ticket) => {
                     return (
-                        <TicketCard
+                        <ArchivedTicketCard
                             key={ticket.id}
                             id={ticket.id}
                             eventId={ticket.eventId}
                             status={ticket.status}
-                        ></TicketCard>
+                        ></ArchivedTicketCard>
                     );
                 })}
             </div>

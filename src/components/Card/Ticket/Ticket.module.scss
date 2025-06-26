@@ -13,6 +13,7 @@
     .ticketBody {
         @include flex-column();
         justify-content: space-between;
+        align-self: start;
         box-sizing: border-box;
         padding: 20px;
         .ticketTitle {
@@ -22,9 +23,17 @@
             p {
                 padding: 0 10px;
             }
-            button {
-                border-radius: 50px;
-                padding: 0 20px;
+            .wrapper {
+                width: 100%;
+                max-width: 200px;
+                @include flex-row();
+                @include flex-justify-center();
+                gap: 10px;
+                button {
+                    border-radius: 50px;
+                    height: 40px;
+                    padding: 0 20px;
+                }
             }
         }
     }
