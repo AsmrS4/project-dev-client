@@ -1,0 +1,18 @@
+@import '@styles/index.scss';
+
+.modalButton {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    letter-spacing: 0.02cm;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: $btn-default-color;
+    transition: all ease-in-out 0.3s;
+    &:hover {
+        background-color: $btn-submit-color;
+        color: $white-color;
+    }
+}

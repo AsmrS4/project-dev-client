@@ -1,24 +1,70 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
-import Form from '@components/Form';
+import Form, { EditForm } from '@components/Form';
 import TextField from '@components/Field/TextField';
 import defaultAvatar from '@assets/userAvatar.jpg';
-import Button from '@components/Button';
-import Header from '@components/Header';
+import Button, { ActionButton } from '@components/Button';
+import { useAppSelector } from '@hooks/useAppDispatch';
+import axios, { AxiosError } from 'axios';
+import { useDispatch } from 'react-redux';
+import { clearSession } from '@store/User/AuthReducer';
+import ModalComponent from '@components/Modal';
+import type { ProfileProps } from 'src/models/Auth/Auth';
+import Message from '@components/Message';
+import { useNavigate } from 'react-router-dom';
+
 const ProfilePage = () => {
+    const { token } = useAppSelector((state) => state.authReducer);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [profile, setProfile] = useState<ProfileProps>({
+        email: '',
+        fullName: '',
+        phoneNumber: '',
+        image: '',
+    });
+    const dispatch: any = useDispatch();
+    const navigate: any = useNavigate();
+    const handleModal = () => {
+        setIsOpen((prev) => !prev);
+    };
+    const fetchProfile = async () => {
+        try {
+            const response = await axios({
+                url: `${'http://localhost:8090/api'}/user/profile`,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setProfile({
+                email: response.data.email,
+                fullName: response.data.fullName,
+                image: response.data.image,
+                phoneNumber: response.data.phoneNumber,
+            });
+        } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response && error.response.status == 401) {
+                dispatch(clearSession());
+                navigate('/auth/sign-in');
+            }
+        }
+    };
+    useEffect(() => {
+        fetchProfile();
+    }, []);
+    useEffect(() => {}, [profile]);
     const email = {
         label: 'Email',
         type: 'text',
-        value: 'example.com',
+        value: profile.email,
     };
     const phone = {
         label: 'Номер телефона',
         type: 'text',
-        value: '+7 800 555 3535',
+        value: profile.phoneNumber,
     };
     return (
         <>
-            <Header />
             <section className={styles.profilePage}>
                 <div className={styles.profileContent}>
                     <div className={styles.imgWrapper}>
@@ -28,12 +74,18 @@ const ProfilePage = () => {
                             alt='profile photo'
                         />
                     </div>
-                    <Form title='Имя пользователя' onSubmit={() => {}} readonly={true}>
+                    <Form title={profile.fullName} onSubmit={() => {}} readonly={true}>
                         <TextField {...email} />
                         <TextField {...phone} />
-                        <Button title='Редактировать' type='button' />
+                        <ActionButton title='Редактировать' type='button' onClick={handleModal} />
                     </Form>
                 </div>
+                <ModalComponent
+                    title='Редактирование'
+                    initialState={isOpen}
+                    initialDetails={profile}
+                    onClick={handleModal}
+                ></ModalComponent>
             </section>
         </>
     );

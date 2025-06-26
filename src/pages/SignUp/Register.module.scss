@@ -8,5 +8,5 @@
     overflow-y: scroll;
     @include flex-column;
     @include flex-all-center;
-    height: 100%;
+    height: auto;
 }

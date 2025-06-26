@@ -1,48 +1,64 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './Navbar.module.scss';
-
-interface NavbarProps {
-    isAuth: boolean;
-    role: 'CLIENT' | 'MANAGER' | 'SECURITY';
-}
-
-const Navbar: React.FC<NavbarProps> = ({ isAuth = false, role = 'CLIENT' }) => {
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '@store/User/AuthActionCreators';
+import { useAppSelector } from '@hooks/useAppDispatch';
+import { Link } from 'react-router-dom';
+const Navbar: React.FC = () => {
+    const dispatch: any = useDispatch();
+    const navigate = useNavigate();
+    const { isAuth, role } = useAppSelector((state) => state.authReducer);
+    const logout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        dispatch(logoutUser());
+        navigate('/auth/sign-in');
+    };
+    useEffect(() => {}, [role, isAuth]);
     return (
         <nav className={style.navBar}>
             <ul className={style.navBar__list}>
-                <li className={style.navBar__listItem}>
-                    <a href='/'>{'Главная'}</a>
-                </li>
                 {isAuth && (
                     <>
+                        <li className={style.navBar__listItem}>
+                            <Link to={'/'}>{'Главная'}</Link>
+                        </li>
                         {role == 'CLIENT' && (
                             <li className={style.navBar__listItem}>
-                                <a href='/tickets'>{'Билеты'}</a>
+                                <Link to={'/tickets'}>{'Билеты'}</Link>
                             </li>
                         )}
                         {role == 'MANAGER' && (
                             <li className={style.navBar__listItem}>
-                                <a href='/archive'>{'Арихив мероприятий'}</a>
+                                <Link to='/archive'>{'Арихив мероприятий'}</Link>
                             </li>
                         )}
-                        <li className={style.navBar__listItem}>
-                            <a href='/profile'>{'Профиль'}</a>
-                        </li>
+                        {role == 'CLIENT' && (
+                            <li className={style.navBar__listItem}>
+                                <Link to='/profile'>{'Профиль'}</Link>
+                            </li>
+                        )}
                     </>
                 )}
             </ul>
             <ul className={style.navBar__list}>
                 {isAuth ? (
                     <li className={style.navBar__listItem}>
-                        <a href='/'>{'Выйти'}</a>
+                        <a
+                            onClick={(e) => {
+                                logout(e);
+                            }}
+                        >
+                            {'Выйти'}
+                        </a>
                     </li>
                 ) : (
                     <>
                         <li className={style.navBar__listItem}>
-                            <a href='/auth/sign-up'>{'Регистрация'}</a>
+                            <Link to='/auth/sign-up'>{'Регистрация'}</Link>
                         </li>
                         <li className={style.navBar__listItem}>
-                            <a href='/auth/sign-in'>{'Вход'}</a>
+                            <Link to='/auth/sign-in'>{'Вход'}</Link>
                         </li>
                     </>
                 )}

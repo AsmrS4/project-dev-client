@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useValidation } from "./useValidation.ts";
 
 interface InputInitProps {
-    initialValue: string | number;
+    initialValue: string | number | null;
     validations: any;
     type: string | 'text',
     label: string;
@@ -10,7 +10,7 @@ interface InputInitProps {
 }
 
 export const useInput = (props: InputInitProps) => {
-    const [value, setValue] = useState<string | number>(props.initialValue);
+    const [value, setValue] = useState<string | number | null >(props.initialValue);
     const label : string = props.label;
     const type : string = props.type;
     const placeholder: string = props.placeholder ?? "";
@@ -20,5 +20,5 @@ export const useInput = (props: InputInitProps) => {
         setValue(e.target.value);
     };
     
-    return { value, onChange, label, type, placeholder, ...valid };
+    return { value, onChange, setValue, label, type, placeholder, ...valid };
 };

@@ -1,5 +1,6 @@
 @import '@styles/index.scss';
 
+.editForm,
 .form {
     max-width: 576px;
     width: 100%;
@@ -7,6 +8,7 @@
     box-sizing: border-box;
     padding: 20px;
     border-radius: 16px;
+    background-color: $white-color;
 
     @include flex-column();
     @include flex-justify-center();
@@ -26,4 +28,9 @@
         @include flex-all-center();
         gap: 16px;
     }
+}
+
+.editForm {
+    box-shadow: none;
+    border-radius: 8px;
 }
