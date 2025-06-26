@@ -20,12 +20,12 @@ const ActiveTicketPage = () => {
     }, []);
 
     useEffect(() => {
-        console.log(code);
         if (code == 401) {
             dispatch(clearSession());
             navigate('/auth/sign-in');
         }
     }, [code]);
+
     return (
         <section className={styles.ticketPage}>
             <div className={styles.pageHeader}>
