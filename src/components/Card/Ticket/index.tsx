@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Ticket.module.scss';
+import './Statuses.scss';
 import { ActionButton } from '@components/Button';
 import { useNavigate } from 'react-router-dom';
 import { DateConverter } from '@utils/converter/DateConverter';
@@ -7,7 +8,11 @@ import type { TicketProps } from 'src/models/Ticket/Ticket';
 import type { IEvent } from 'src/models/Event/Event';
 import axios from 'axios';
 import { useAppSelector } from '@hooks/useAppDispatch';
-
+const statuses = {
+    ACTIVE: 'Активно',
+    CANCELLED: 'Отменено',
+    ARCHIVED: 'Посещено',
+};
 const TicketCard: React.FC<TicketProps> = ({ eventId, status }) => {
     const navigate = useNavigate();
     const [details, setDetails] = useState<IEvent>({
@@ -49,9 +54,11 @@ const TicketCard: React.FC<TicketProps> = ({ eventId, status }) => {
                 <h1 className={styles.ticketTitle}>{details?.title}</h1>
                 <div className={styles.ticketContent}>
                     <p>{details?.address}</p>
-                    <p>{details?.status}</p>
+                    <p className={`${details?.status.toLocaleLowerCase()}`}>
+                        {statuses[details?.status]}
+                    </p>
                     <ActionButton
-                        title='Перейти на страницу'
+                        title='Оставить отзыв'
                         type='button'
                         onClick={onClick}
                     ></ActionButton>

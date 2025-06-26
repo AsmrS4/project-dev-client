@@ -7,6 +7,7 @@ import axios, { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
 import { useNavigate } from 'react-router-dom';
+import { LinkButton } from '@components/Button';
 
 const ActiveTicketPage = () => {
     const [tickets, setTickets] = useState<TicketProps[]>([]);
@@ -35,7 +36,11 @@ const ActiveTicketPage = () => {
     }, []);
     return (
         <section className={styles.ticketPage}>
-            <div className={styles.pageHeader}></div>
+            <div className={styles.pageHeader}>
+                <h2>Активные билеты</h2>
+
+                <LinkButton href='/history/tickets' title={'Архив'} type={'submit'}></LinkButton>
+            </div>
             <div className={styles.ticketContainer}>
                 {tickets.map((ticket) => {
                     return (

@@ -10,6 +10,19 @@ section.ticketPage {
     box-sizing: border-box;
     margin: 0 auto;
     gap: 20px;
+    .pageHeader {
+        font-weight: 500;
+        @include flex-row();
+        @include flex-justify-center;
+        h2 {
+            font-size: 36px;
+        }
+        button {
+            max-width: 120px;
+            height: 40px;
+            border-radius: 50px;
+        }
+    }
     .ticketContainer {
         @include flex-column();
         align-items: center;
