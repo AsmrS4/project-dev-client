@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Event.module.scss';
 
-import Button, { LinkButton } from '@components/Button';
+import { LinkButton } from '@components/Button';
 import { DateConverter } from '@utils/converter/DateConverter';
 import type { IEventCard } from 'src/models/Event/Event';
 

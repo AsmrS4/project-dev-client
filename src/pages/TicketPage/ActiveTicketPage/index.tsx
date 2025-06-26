@@ -6,11 +6,13 @@ import { useAppSelector } from '@hooks/useAppDispatch';
 import axios, { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
+import { useNavigate } from 'react-router-dom';
 
 const ActiveTicketPage = () => {
     const [tickets, setTickets] = useState<TicketProps[]>([]);
     const { token } = useAppSelector((state) => state.authReducer);
     const dispatch: any = useDispatch();
+    const navigate: any = useNavigate();
     const fetchTickets = async () => {
         try {
             const response = await axios({
@@ -20,11 +22,11 @@ const ActiveTicketPage = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(response.data);
             setTickets(response.data);
         } catch (error: unknown) {
             if (error instanceof AxiosError && error.response && error.response.status == 401) {
                 dispatch(clearSession());
+                navigate('/auth/sign-in');
             }
         }
     };

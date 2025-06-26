@@ -11,6 +11,7 @@ import { clearSession } from '@store/User/AuthReducer';
 import ModalComponent from '@components/Modal';
 import type { ProfileProps } from 'src/models/Auth/Auth';
 import Message from '@components/Message';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
     const { token } = useAppSelector((state) => state.authReducer);
@@ -21,12 +22,11 @@ const ProfilePage = () => {
         phoneNumber: '',
         image: '',
     });
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
+    const navigate: any = useNavigate();
     const handleModal = () => {
-        console.log('clicked');
         setIsOpen((prev) => !prev);
     };
-
     const fetchProfile = async () => {
         try {
             const response = await axios({
@@ -45,6 +45,7 @@ const ProfilePage = () => {
         } catch (error: unknown) {
             if (error instanceof AxiosError && error.response && error.response.status == 401) {
                 dispatch(clearSession());
+                navigate('/auth/sign-in');
             }
         }
     };

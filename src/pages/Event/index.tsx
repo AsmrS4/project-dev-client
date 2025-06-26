@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Event.module.scss';
 import ImageCarousel from '@components/ImageCarousel';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import type { IEvent } from 'src/models/Event/Event';
-import axios from 'axios';
+import axios, { Axios, AxiosError } from 'axios';
 import { useAppSelector } from '@hooks/useAppDispatch';
 import Title from 'antd/es/skeleton/Title';
 import { ActionButton } from '@components/Button';
 import { DateConverter } from '@utils/converter/DateConverter';
+import { useDispatch } from 'react-redux';
+import { clearSession } from '@store/User/AuthReducer';
 
 const EventPage = () => {
     const { id } = useParams();
@@ -23,6 +25,8 @@ const EventPage = () => {
         address: '',
         status: '',
     });
+    const dispatch: any = useDispatch();
+    const navigate: any = useNavigate();
     const bookEvent = async () => {
         try {
             const response = await axios({
@@ -32,7 +36,11 @@ const EventPage = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-        } catch (error) {
+        } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response && error.response.status == 401) {
+                dispatch(clearSession());
+                navigate('/auth/sign-in');
+            }
             console.log(error);
         }
     };
@@ -46,7 +54,11 @@ const EventPage = () => {
                 },
             });
             setDetails(response.data);
-        } catch (error) {
+        } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response && error.response.status == 401) {
+                dispatch(clearSession());
+                navigate('/auth/sign-in');
+            }
             console.log(error);
         }
     };
