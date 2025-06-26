@@ -8,32 +8,24 @@ import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
 import { useNavigate } from 'react-router-dom';
 import { LinkButton } from '@components/Button';
+import { fetchTickets } from '@store/Ticket/TicketAction';
 
 const ActiveTicketPage = () => {
-    const [tickets, setTickets] = useState<TicketProps[]>([]);
     const { token } = useAppSelector((state) => state.authReducer);
     const dispatch: any = useDispatch();
     const navigate: any = useNavigate();
-    const fetchTickets = async () => {
-        try {
-            const response = await axios({
-                url: `http://localhost:8090/api/booking/tickets`,
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setTickets(response.data);
-        } catch (error: unknown) {
-            if (error instanceof AxiosError && error.response && error.response.status == 401) {
-                dispatch(clearSession());
-                navigate('/auth/sign-in');
-            }
-        }
-    };
+    const { tickets, code, isLoading } = useAppSelector((state) => state.ticketReducer);
     useEffect(() => {
-        fetchTickets();
+        dispatch(fetchTickets(token));
     }, []);
+
+    useEffect(() => {
+        console.log(code);
+        if (code == 401) {
+            dispatch(clearSession());
+            navigate('/auth/sign-in');
+        }
+    }, [code]);
     return (
         <section className={styles.ticketPage}>
             <div className={styles.pageHeader}>

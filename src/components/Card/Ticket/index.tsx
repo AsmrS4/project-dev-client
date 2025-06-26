@@ -10,6 +10,7 @@ import axios, { AxiosError } from 'axios';
 import { useAppSelector } from '@hooks/useAppDispatch';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
+import { fetchTickets } from '@store/Ticket/TicketAction';
 const statuses = {
     ACTIVE: 'Активно',
     CANCELED: 'Отменено',
@@ -60,6 +61,7 @@ const TicketCard: React.FC<TicketProps> = ({ eventId, id, status }) => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            dispatch(fetchTickets(token));
         } catch (error: unknown) {
             if (error instanceof AxiosError && error.response && error.response.status == 401) {
                 dispatch(clearSession());
