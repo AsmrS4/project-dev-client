@@ -6,6 +6,7 @@ import { useAppSelector } from '@hooks/useAppDispatch';
 import { useDispatch } from 'react-redux';
 import { fetchEvents } from '@store/Event/EventActionCreator';
 import { useNavigate } from 'react-router-dom';
+import { clearSession } from '@store/User/AuthReducer';
 const HomePage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
     const { isAuth } = useAppSelector((state) => state.authReducer);
@@ -14,6 +15,12 @@ const HomePage = () => {
     useEffect(() => {
         !isAuth ? navigate('/auth/sign-in') : dispatch(fetchEvents());
     }, [isAuth]);
+    useEffect(() => {
+        if (code == 401) {
+            dispatch(clearSession());
+            navigate('/auth/sign-in');
+        }
+    });
     return (
         <section className={styles.homePage}>
             <div className={styles.eventContainer}>

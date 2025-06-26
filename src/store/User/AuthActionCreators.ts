@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import type { ILogin } from "src/models/Auth/Auth";
 import { clearSession, setErrorMessage, setSession } from "./AuthReducer";
@@ -39,10 +39,9 @@ export const logoutUser = () => async(dispatch: Dispatch) => {
         })
         localStorage.clear();
         dispatch(await clearSession());
-    } catch(error: unknown) {
-        if(error instanceof AxiosError && error.response) {
-            localStorage.clear();
-            dispatch(await clearSession());
-        }
+    } catch(error) {
+        console.log(error)
+        localStorage.clear();
+        dispatch(await clearSession());
     } 
 }

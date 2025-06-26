@@ -16,6 +16,7 @@ interface IActionButton {
     title: string;
     type: 'submit' | 'button' | 'reset';
     onClick: () => void;
+    disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
@@ -34,6 +35,7 @@ export const ActionButton = (props: IActionButton) => {
             onClick={() => {
                 props.onClick();
             }}
+            disabled={props.disabled}
         >
             {props.title}
         </button>
