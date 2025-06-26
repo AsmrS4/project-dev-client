@@ -1,15 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IEventCard } from "src/models/Event/Event";
+import type { ResponseCode, LoadingProps } from "src/models/Status/Status";
 import type { TicketProps } from "src/models/Ticket/Ticket";
 
-interface TicketState {
+interface TicketState extends LoadingProps {
     tickets: TicketProps[],
-    isLoading: boolean;
 }
-interface Error {
-    code: number | null;
-}
-const initialState: TicketState & Error = {
+
+const initialState: TicketState & ResponseCode = {
     tickets: [],
     isLoading: false,
     code: null

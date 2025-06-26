@@ -9,6 +9,8 @@ import type { ProfileProps } from 'src/models/Auth/Auth';
 import Message from '@components/Message';
 import axios, { AxiosError } from 'axios';
 import { useAppSelector } from '@hooks/useAppDispatch';
+import { useDispatch } from 'react-redux';
+import { setProfile } from '@store/User/ProfileReducer';
 
 interface ModalProps {
     title: string;
@@ -26,6 +28,7 @@ const ModalComponent: React.FC<ModalProps> = ({ title, initialState, onClick, in
     const email: any = useInput(emailInit);
     const userName: any = useInput(userNameInit);
     const phoneNumber: any = useInput(phoneInit);
+    const dispatch: any = useDispatch();
     const handleOk = () => {
         handleForm();
     };
@@ -57,6 +60,14 @@ const ModalComponent: React.FC<ModalProps> = ({ title, initialState, onClick, in
                 },
             });
             setIsSuccess(true);
+            dispatch(
+                setProfile({
+                    email: email.value,
+                    fullName: userName.value,
+                    phoneNumber: phoneNumber.value,
+                    image: null,
+                }),
+            );
         } catch (error: unknown) {
             if (error instanceof AxiosError && error.response && error.response.status == 400) {
                 setError(true);

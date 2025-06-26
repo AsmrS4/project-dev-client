@@ -12,47 +12,29 @@ import ModalComponent from '@components/Modal';
 import type { ProfileProps } from 'src/models/Auth/Auth';
 import Message from '@components/Message';
 import { useNavigate } from 'react-router-dom';
+import { fetchProfile } from '@store/User/ProfileAction';
 
 const ProfilePage = () => {
     const { token } = useAppSelector((state) => state.authReducer);
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [profile, setProfile] = useState<ProfileProps>({
-        email: '',
-        fullName: '',
-        phoneNumber: '',
-        image: '',
-    });
+    const { profile, code } = useAppSelector((state) => state.profileReducer);
     const dispatch: any = useDispatch();
     const navigate: any = useNavigate();
     const handleModal = () => {
         setIsOpen((prev) => !prev);
     };
-    const fetchProfile = async () => {
-        try {
-            const response = await axios({
-                url: `${'http://localhost:8090/api'}/user/profile`,
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setProfile({
-                email: response.data.email,
-                fullName: response.data.fullName,
-                image: response.data.image,
-                phoneNumber: response.data.phoneNumber,
-            });
-        } catch (error: unknown) {
-            if (error instanceof AxiosError && error.response && error.response.status == 401) {
-                dispatch(clearSession());
-                navigate('/auth/sign-in');
-            }
-        }
-    };
+
     useEffect(() => {
-        fetchProfile();
+        dispatch(fetchProfile(token));
     }, []);
-    useEffect(() => {}, [profile]);
+
+    useEffect(() => {
+        console.log(code);
+        if (code == 401) {
+            dispatch(clearSession());
+            navigate('/auth/sign-in');
+        }
+    }, [code]);
     const email = {
         label: 'Email',
         type: 'text',

@@ -1,14 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IEventCard } from "src/models/Event/Event";
+import type { LoadingProps, ResponseCode } from "src/models/Status/Status";
 
-interface EventState {
+interface EventState extends LoadingProps,ResponseCode {
     events: IEventCard[],
-    isLoading: boolean;
 }
-interface Error {
-    code: number | null;
-}
-const initialState: EventState & Error = {
+
+const initialState: EventState = {
     events: [],
     isLoading: false,
     code: null
@@ -19,6 +17,7 @@ const eventSlice = createSlice({
     initialState,
     reducers: {
         setEvents: (state, action: PayloadAction<EventState>) => {
+            state.isLoading = action.payload.isLoading
             state.events = action.payload.events;
             state.code = null
         },
