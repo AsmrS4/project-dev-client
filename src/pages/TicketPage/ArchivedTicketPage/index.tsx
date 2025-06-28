@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArchivedTicketCard } from '@components/Card/Ticket';
 import axios, { AxiosError } from 'axios';
 import { clearSession } from '@store/User/AuthReducer';
+import EmptyAnswer from '@components/Message/Answer';
 const ArhivedTicketPage = () => {
     const [tickets, setTickets] = useState<TicketProps[]>([]);
     const { token } = useAppSelector((state) => state.authReducer);
@@ -40,16 +41,20 @@ const ArhivedTicketPage = () => {
                 <LinkButton href='/tickets' title={'Активные'} type={'submit'}></LinkButton>
             </div>
             <div className={styles.ticketContainer}>
-                {tickets.map((ticket) => {
-                    return (
-                        <ArchivedTicketCard
-                            key={ticket.id}
-                            id={ticket.id}
-                            eventId={ticket.eventId}
-                            status={ticket.status}
-                        ></ArchivedTicketCard>
-                    );
-                })}
+                {tickets.length > 0 ? (
+                    tickets.map((ticket) => {
+                        return (
+                            <ArchivedTicketCard
+                                key={ticket.id}
+                                id={ticket.id}
+                                eventId={ticket.eventId}
+                                status={ticket.status}
+                            ></ArchivedTicketCard>
+                        );
+                    })
+                ) : (
+                    <EmptyAnswer message={'Архив пуст'}></EmptyAnswer>
+                )}
             </div>
         </section>
     );

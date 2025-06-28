@@ -1,0 +1,30 @@
+@import '@styles';
+
+.answerCard {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    padding: 20px;
+    background-color: inherit;
+    @include flex-column();
+    @include flex-all-center();
+    color: rgb(65, 65, 65);
+
+    .answerContent {
+        height: auto;
+        width: 100%;
+        @include flex-column();
+        @include flex-justify-center();
+        gap: 20px;
+        img {
+            height: 120px;
+            width: 120px;
+        }
+    }
+}
+
+h2 {
+    font-weight: 400;
+    margin: 0;
+}
