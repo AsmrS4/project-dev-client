@@ -10,7 +10,7 @@ const ErrorServer = () => {
     const images: string[] = [died, blowing, crying, sleeping];
     const [image, setImage] = useState<string | undefined>();
     useEffect(() => {
-        const index: number = randomIndex(0, images.length);
+        const index: number = randomIndex(0, images.length - 1);
         setImage(images[index]);
     }, []);
     return (

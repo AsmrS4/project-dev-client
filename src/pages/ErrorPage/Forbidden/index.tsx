@@ -10,9 +10,7 @@ const ForbiddenError = () => {
             <div className={styles.errorContainer}>
                 <div className=''>
                     <img className={styles.errorImg} src={image} alt='403 image' />
-                    <span className={styles.errorTitle}>
-                        {' Доступ запрещен.\nУ вас недостаточно прав для доступа к этому ресурсу'}
-                    </span>
+                    <span className={styles.errorTitle}>{' Доступ запрещен'}</span>
                 </div>
                 <LinkButton title={'Вернуться на Главную'} href={'/'} type='button'></LinkButton>
             </div>
