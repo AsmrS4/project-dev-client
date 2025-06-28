@@ -3,7 +3,7 @@ import style from '../Field.module.scss';
 interface InputProps {
     label: string;
     type?: string | 'text';
-    value: string | number;
+    value: string | number | undefined;
     placeholder?: string | '';
     onChange: (value: any) => void;
 }

@@ -15,7 +15,7 @@ interface ILinkButton {
 interface IActionButton {
     title: string;
     type: 'submit' | 'button' | 'reset';
-    onClick: () => void;
+    onClick: () => void | void;
     disabled?: boolean;
 }
 

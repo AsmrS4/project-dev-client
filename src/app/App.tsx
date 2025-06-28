@@ -13,6 +13,8 @@ import ErrorServer from '@pages/ErrorPage/ServerError';
 import ForbiddenError from '@pages/ErrorPage/Forbidden';
 import ArchivedEventPage from '@pages/ArchivedEvent';
 import HistoryPage from '@pages/History/HistoryPage';
+import CreateEventPage from '@pages/ModifyEvent/CreateEventPage';
+import EditEventPage from '@pages/ModifyEvent/EditEventPage';
 
 function App() {
     return (
@@ -36,6 +38,8 @@ function App() {
                         <Route path='/history/event' element={<HistoryPage />} />
                         <Route path='/history/event/:id' element={<ArchivedEventPage />} />
                     </Route>
+                    <Route path='/create/event' element={<CreateEventPage />} />
+                    <Route path='/edit/event' element={<EditEventPage />} />
                     <Route path='*' element={<NotFound />} />
                     <Route path='/error/server' element={<ErrorServer />} />
                     <Route path='/error/forbidden' element={<ForbiddenError />} />

@@ -22,3 +22,11 @@ export interface IEvent {
     address: string,
     status: string
 }
+
+export interface EventCreate {
+    title: string;
+    description: string;
+    dateTime: any;
+    address: string;
+    images: any[];
+}
