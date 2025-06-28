@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { fetchEvents } from '@store/Event/EventActionCreator';
 import { useNavigate } from 'react-router-dom';
 import { clearSession } from '@store/User/AuthReducer';
+import EmptyAnswer from '@components/Message/Answer';
 const HomePage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
     const { isAuth } = useAppSelector((state) => state.authReducer);
@@ -24,9 +25,15 @@ const HomePage = () => {
     return (
         <section className={styles.homePage}>
             <div className={styles.eventContainer}>
-                {events.map((event) => {
-                    return <EventCard key={event.id} {...event} />;
-                })}
+                {events && events.length > 0 ? (
+                    events.map((event) => {
+                        return <EventCard key={event.id} {...event} />;
+                    })
+                ) : (
+                    <>
+                        <EmptyAnswer message={'Мероприятия не найдены'}></EmptyAnswer>
+                    </>
+                )}
             </div>
             <Filter />
         </section>

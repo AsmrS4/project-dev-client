@@ -8,6 +8,7 @@ import Header from '@components/Header';
 import EventPage from '@pages/Event';
 import ActiveTicketPage from '@pages/TicketPage/ActiveTicketPage';
 import ArhivedTicketPage from '@pages/TicketPage/ArchivedTicketPage';
+import NotFound from '@pages/ErrorPage/NotFound';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                         <Route path='/auth/sign-in' element={<Login />} />
                         <Route path='/auth/sign-up' element={<SignUp />} />
                     </Route>
+                    <Route path='*' element={<NotFound />} />
                 </Routes>
             </BrowserRouter>
         </>
