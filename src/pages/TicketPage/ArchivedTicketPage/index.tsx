@@ -37,7 +37,7 @@ const ArhivedTicketPage = () => {
     return (
         <section className={styles.ticketPage}>
             <div className={styles.pageHeader}>
-                <h2>Архив мероприятий</h2>
+                <h2>Архив билетов</h2>
                 <LinkButton href='/tickets' title={'Активные'} type={'submit'}></LinkButton>
             </div>
             <div className={styles.ticketContainer}>
