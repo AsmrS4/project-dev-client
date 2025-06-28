@@ -9,6 +9,8 @@ import EventPage from '@pages/Event';
 import ActiveTicketPage from '@pages/TicketPage/ActiveTicketPage';
 import ArhivedTicketPage from '@pages/TicketPage/ArchivedTicketPage';
 import NotFound from '@pages/ErrorPage/NotFound';
+import ErrorServer from '@pages/ErrorPage/ServerError';
+import ForbiddenError from '@pages/ErrorPage/Forbidden';
 
 function App() {
     return (
@@ -29,6 +31,8 @@ function App() {
                         <Route path='/auth/sign-up' element={<SignUp />} />
                     </Route>
                     <Route path='*' element={<NotFound />} />
+                    <Route path='/error/server' element={<ErrorServer />} />
+                    <Route path='/error/forbidden' element={<ForbiddenError />} />
                 </Routes>
             </BrowserRouter>
         </>
