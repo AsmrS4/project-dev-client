@@ -3,10 +3,11 @@ import styles from '../ErrorPage.module.scss';
 import died from '@assets/died.svg';
 import blowing from '@assets/blowing.svg';
 import crying from '@assets/crying.svg';
+import sleeping from '@assets/sleeping.svg';
 import { LinkButton } from '@components/Button';
 
 const ErrorServer = () => {
-    const images: string[] = [died, blowing, crying];
+    const images: string[] = [died, blowing, crying, sleeping];
     const [image, setImage] = useState<string | undefined>();
     useEffect(() => {
         const index: number = randomIndex(0, images.length);
