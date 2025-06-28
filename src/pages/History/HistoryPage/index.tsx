@@ -1,26 +1,37 @@
 import React, { useEffect } from 'react';
-import styles from './HomePage.module.scss';
+import styles from './HistoryPage.module.scss';
 import Filter from '@components/Filter';
 import EventCard from '@components/Card/Event';
 import { useAppSelector } from '@hooks/useAppDispatch';
 import { useDispatch } from 'react-redux';
-import { fetchEvents } from '@store/Event/EventActionCreator';
 import { useNavigate } from 'react-router-dom';
 import { clearSession } from '@store/User/AuthReducer';
 import EmptyAnswer from '@components/Message/Answer';
-import { ActionButton } from '@components/Button';
-const HomePage = () => {
+import { fetchHistoryEvents } from '@store/Event/History/HistoryEventActionCreator';
+const HistoryPage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
-    const { isAuth, role } = useAppSelector((state) => state.authReducer);
+    const { isAuth } = useAppSelector((state) => state.authReducer);
     const dispatch: any = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
-        !isAuth ? navigate('/auth/sign-in') : dispatch(fetchEvents());
+        !isAuth ? navigate('/auth/sign-in') : dispatch(fetchHistoryEvents());
     }, [isAuth]);
     useEffect(() => {
-        if (code == 401) {
-            dispatch(clearSession());
-            navigate('/auth/sign-in');
+        if (code != null) {
+            switch (code) {
+                case 401: {
+                    dispatch(clearSession());
+                    navigate('/auth/sign-in');
+                    break;
+                }
+                case 403: {
+                    navigate('/error/forbidden');
+                    break;
+                }
+                default: {
+                    navigate('/error/server');
+                }
+            }
         }
     });
     return (
@@ -32,24 +43,13 @@ const HomePage = () => {
                     })
                 ) : (
                     <>
-                        <EmptyAnswer message={'Мероприятия не найдены'}></EmptyAnswer>
+                        <EmptyAnswer message={'Архив пуст'}></EmptyAnswer>
                     </>
                 )}
             </div>
-            <div className={styles.wrapper}>
-                <Filter />
-                {role == 'MANAGER' && (
-                    <ActionButton
-                        title={'Создать мероприятие'}
-                        type={'button'}
-                        onClick={() => {
-                            navigate('/create/event');
-                        }}
-                    />
-                )}
-            </div>
+            <Filter />
         </section>
     );
 };
 
-export default HomePage;
+export default HistoryPage;

@@ -100,7 +100,7 @@ const EventPage = () => {
                             disabled={isBooked}
                         ></ActionButton>
                     ) : role === 'MANAGER' ? (
-                        <>
+                        <div className={styles.wrapper}>
                             <ActionButton
                                 title={'Редактировать'}
                                 type={'submit'}
@@ -111,7 +111,7 @@ const EventPage = () => {
                                 type={'submit'}
                                 onClick={() => {}}
                             ></ActionButton>
-                        </>
+                        </div>
                     ) : (
                         <></>
                     ))}
