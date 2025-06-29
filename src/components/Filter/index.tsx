@@ -28,8 +28,8 @@ const Filter: React.FC<FilterProps> = ({
     }, [startTime]);
     return (
         <div className={styles.filter}>
+            <h5 className={styles.filterTitle}>Фильтр</h5>
             <div className={styles.filterFieldsWrapper}>
-                <h5 className={styles.filterTitle}>Фильтр</h5>
                 <DatePickerComp
                     label={'От'}
                     value={startTime}

@@ -13,6 +13,16 @@
     margin: 0 auto;
     gap: 20px;
     .pageHeader {
+        @media (max-width: 600px) {
+            width: 100%;
+            @include flex-column();
+            align-items: start;
+            gap: 10px;
+            div {
+                max-width: 500px;
+                width: 100%;
+            }
+        }
         @include flex-row();
         @include flex-justify-center();
         width: 100%;

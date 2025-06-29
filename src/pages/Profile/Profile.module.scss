@@ -13,18 +13,28 @@
         @include flex-row();
         align-items: start;
         justify-content: space-between;
-
-        margin-top: 40px;
+        @media (max-width: 600px) {
+            @include flex-column();
+        }
+        margin: 20px 0;
         div.imgWrapper {
             max-width: 300px;
             width: 100%;
             @include flex-column();
             box-shadow: 0px 0px 6px 0px rgba(34, 60, 80, 0.2);
-
+            margin-right: 20px;
+            margin-bottom: 20px;
             box-sizing: border-box;
             overflow: hidden;
             border-radius: 16px;
             .profilePhoto {
+                width: 100%;
+            }
+            @media (max-width: 768px) {
+                max-width: 200px;
+            }
+            @media (max-width: 600px) {
+                max-width: none;
                 width: 100%;
             }
         }
