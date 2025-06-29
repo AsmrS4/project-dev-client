@@ -1,4 +1,4 @@
-import { href, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import style from './Button.module.scss';
 
 interface ButtonProps {

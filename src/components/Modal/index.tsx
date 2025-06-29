@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ModalComponent.module.scss';
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 import { EditForm } from '@components/Form';
 import Field from '@components/Field/Input';
 import { useInput } from '@hooks/useInput';

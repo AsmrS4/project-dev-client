@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './HistoryPage.module.scss';
 import Filter from '@components/Filter';
 import EventCard from '@components/Card/Event';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { clearSession } from '@store/User/AuthReducer';
 import EmptyAnswer from '@components/Message/Answer';
 import { fetchHistoryEvents } from '@store/Event/History/HistoryEventActionCreator';
+
 const HistoryPage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
     const { isAuth } = useAppSelector((state) => state.authReducer);

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input, Image } from 'antd';
-import './ImageUploader.scss';
+
 import { ActionButton } from '@components/Button';
+import './ImageUploader.scss';
+
 interface ImageType {
     imageUrl: string;
 }

@@ -6,7 +6,7 @@ import Message from '@components/Message';
 import DatePickerComp from '@components/DatePicker';
 import TextAreaComp from '@components/Field/TextArea';
 import ImageUploader from '@components/ImageUploader';
-import Button, { ActionButton } from '@components/Button';
+import { ActionButton } from '@components/Button';
 import moment, { type Moment } from 'moment';
 import axios, { AxiosError } from 'axios';
 import { useAppSelector } from '@hooks/useAppDispatch';
@@ -77,11 +77,6 @@ const CreateEventPage = () => {
                 images: imageUrls,
             });
             setError(false);
-            console.log(title);
-            console.log(description);
-            console.log(address);
-            console.log(dateTime.format('YYYY-MM-DDTHH:mm:ss'));
-            console.log(imageUrls);
         }
     };
 

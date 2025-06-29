@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './ArchivedEvent.module.scss';
 import ImageCarousel from '@components/ImageCarousel';
 import { useNavigate, useParams } from 'react-router-dom';

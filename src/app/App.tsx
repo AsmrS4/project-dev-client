@@ -39,7 +39,7 @@ function App() {
                         <Route path='/history/event/:id' element={<ArchivedEventPage />} />
                     </Route>
                     <Route path='/create/event' element={<CreateEventPage />} />
-                    <Route path='/edit/event' element={<EditEventPage />} />
+                    <Route path='/edit/event/:id' element={<EditEventPage />} />
                     <Route path='*' element={<NotFound />} />
                     <Route path='/error/server' element={<ErrorServer />} />
                     <Route path='/error/forbidden' element={<ForbiddenError />} />

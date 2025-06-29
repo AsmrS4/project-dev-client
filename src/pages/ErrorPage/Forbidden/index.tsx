@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import styles from '../ErrorPage.module.scss';
 import image from '@assets/sad.svg';
 

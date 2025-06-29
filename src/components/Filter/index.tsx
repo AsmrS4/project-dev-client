@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './Filter.module.scss';
 import Field from '@components/Field/Input';
 import Button from '@components/Button';
+import styles from './Filter.module.scss';
+
 const Filter = () => {
     const date = {
         label: 'От',
