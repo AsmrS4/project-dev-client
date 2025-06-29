@@ -10,6 +10,7 @@ import { ActionButton } from '@components/Button';
 import { DateConverter } from '@utils/converter/DateConverter';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
+import EmptyAnswer from '@components/Message/Answer';
 
 const EventPage = () => {
     const { id } = useParams();
@@ -42,6 +43,35 @@ const EventPage = () => {
             if (error instanceof AxiosError && error.response && error.response.status == 401) {
                 dispatch(clearSession());
                 navigate('/auth/sign-in');
+            }
+            console.log(error);
+        }
+    };
+    const cancelEvent = async () => {
+        try {
+            await axios({
+                url: `http://localhost:8090/api/event/${id}`,
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setDetails((prev) => ({ ...prev, status: 'CANCELED' }));
+        } catch (error) {
+            if (error instanceof AxiosError && error.response) {
+                if (error.response.status == 401) {
+                    dispatch(clearSession());
+                    navigate('/auth/sign-in');
+                }
+                if (error.response.status == 403) {
+                    navigate('/error/forbidden');
+                }
+                if (error.response.status == 404) {
+                    navigate('/ddddd');
+                }
+                if (error.response.status == 500) {
+                    navigate('/error/server');
+                }
             }
             console.log(error);
         }
@@ -111,7 +141,9 @@ const EventPage = () => {
                             <ActionButton
                                 title={'Отменить'}
                                 type={'submit'}
-                                onClick={() => {}}
+                                onClick={() => {
+                                    cancelEvent();
+                                }}
                             ></ActionButton>
                         </div>
                     ) : (
@@ -121,7 +153,7 @@ const EventPage = () => {
             <ImageCarousel images={eventDetails.images}></ImageCarousel>
             <div className={styles.eventContainer}>
                 <div className={styles.details}>
-                    {eventDetails.status === 'ACTIVE' ? (
+                    {eventDetails.status !== 'CANCELED' ? (
                         <>
                             <div className={styles.detailItem}>
                                 <h1>О мероприятии</h1>
@@ -141,7 +173,9 @@ const EventPage = () => {
                             </div>
                         </>
                     ) : (
-                        <>Мероприятие недоступно</>
+                        <>
+                            <EmptyAnswer message={'Мероприятие недоступно'} />
+                        </>
                     )}
                 </div>
             </div>

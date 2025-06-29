@@ -3,6 +3,7 @@ export interface IEventCard {
     images: ImageProps[],
     title: string,
     description: string,
+    status?: string,
     dateTime: []
 }
 
