@@ -8,7 +8,7 @@ interface AuthFormProps {
     onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
     readonly?: boolean | false;
 }
-interface EditFormProps {
+interface ChildrenFormProps {
     children: React.ReactNode;
 }
 
@@ -22,12 +22,23 @@ const Form: React.FC<AuthFormProps> = ({ title, children, onSubmit, readonly }) 
     );
 };
 
-export const EditForm: React.FC<EditFormProps> = ({ children }) => {
+export const EditForm: React.FC<ChildrenFormProps> = ({ children }) => {
     const disableSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     };
     return (
         <form action='' className={styles.editForm} onSubmit={disableSubmit}>
+            <div className={styles.inputWrapper}>{children}</div>
+        </form>
+    );
+};
+
+export const EventForm: React.FC<ChildrenFormProps> = ({ children }) => {
+    const disableSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
+    return (
+        <form action='' className={styles.eventForm} onSubmit={disableSubmit}>
             <div className={styles.inputWrapper}>{children}</div>
         </form>
     );

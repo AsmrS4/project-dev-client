@@ -50,3 +50,12 @@ section.eventPage {
         }
     }
 }
+
+.wrapper {
+    @include flex-row();
+    @include flex-justify-center();
+    gap: 10px;
+    button {
+        padding: 0 20px;
+    }
+}

@@ -7,9 +7,11 @@ import { useDispatch } from 'react-redux';
 import { fetchEvents } from '@store/Event/EventActionCreator';
 import { useNavigate } from 'react-router-dom';
 import { clearSession } from '@store/User/AuthReducer';
+import EmptyAnswer from '@components/Message/Answer';
+import { ActionButton } from '@components/Button';
 const HomePage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
-    const { isAuth } = useAppSelector((state) => state.authReducer);
+    const { isAuth, role } = useAppSelector((state) => state.authReducer);
     const dispatch: any = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -24,11 +26,28 @@ const HomePage = () => {
     return (
         <section className={styles.homePage}>
             <div className={styles.eventContainer}>
-                {events.map((event) => {
-                    return <EventCard key={event.id} {...event} />;
-                })}
+                {events && events.length > 0 ? (
+                    events.map((event) => {
+                        return <EventCard key={event.id} {...event} />;
+                    })
+                ) : (
+                    <>
+                        <EmptyAnswer message={'Мероприятия не найдены'}></EmptyAnswer>
+                    </>
+                )}
             </div>
-            <Filter />
+            <div className={styles.wrapper}>
+                <Filter />
+                {role == 'MANAGER' && (
+                    <ActionButton
+                        title={'Создать мероприятие'}
+                        type={'button'}
+                        onClick={() => {
+                            navigate('/create/event');
+                        }}
+                    />
+                )}
+            </div>
         </section>
     );
 };

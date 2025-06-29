@@ -1,0 +1,53 @@
+@import '@styles';
+
+.uploadContainer {
+    width: 100%;
+    @include flex-column();
+    align-items: start;
+    justify-content: space-between;
+    gap: 10px;
+    button {
+        max-width: 150px;
+    }
+    .imagePreview {
+        width: 100%;
+        @include flex-column();
+        @include flex-justify-center();
+        gap: 10px;
+        .imageWrapper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 4px;
+            min-height: 100px;
+            @include flex-column();
+            @include flex-justify-center();
+            background-color: $btn-default-color;
+            position: relative;
+            gap: 20px;
+            .image {
+                width: 100%;
+                border-radius: 4px;
+            }
+        }
+    }
+}
+
+.urlInput {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 50px;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+    letter-spacing: 0.07cm;
+    background-color: $soft-light-gray-2;
+    &:enabled,
+    :focus {
+        border: none;
+        outline: 1.5px solid $soft-light-gray;
+    }
+    &::placeholder {
+        opacity: 0.4;
+    }
+}

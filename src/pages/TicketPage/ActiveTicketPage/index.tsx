@@ -9,6 +9,7 @@ import { clearSession } from '@store/User/AuthReducer';
 import { useNavigate } from 'react-router-dom';
 import { LinkButton } from '@components/Button';
 import { fetchTickets } from '@store/Ticket/TicketAction';
+import EmptyAnswer from '@components/Message/Answer';
 
 const ActiveTicketPage = () => {
     const { token } = useAppSelector((state) => state.authReducer);
@@ -33,16 +34,20 @@ const ActiveTicketPage = () => {
                 <LinkButton href='/history/tickets' title={'Архив'} type={'submit'}></LinkButton>
             </div>
             <div className={styles.ticketContainer}>
-                {tickets.map((ticket) => {
-                    return (
-                        <TicketCard
-                            key={ticket.id}
-                            id={ticket.id}
-                            eventId={ticket.eventId}
-                            status={ticket.status}
-                        ></TicketCard>
-                    );
-                })}
+                {tickets.length > 0 ? (
+                    tickets.map((ticket) => {
+                        return (
+                            <TicketCard
+                                key={ticket.id}
+                                id={ticket.id}
+                                eventId={ticket.eventId}
+                                status={ticket.status}
+                            ></TicketCard>
+                        );
+                    })
+                ) : (
+                    <EmptyAnswer message={'Список пуст'}></EmptyAnswer>
+                )}
             </div>
         </section>
     );

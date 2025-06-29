@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Event.module.scss';
 import ImageCarousel from '@components/ImageCarousel';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { IEvent } from 'src/models/Event/Event';
-import axios, { Axios, AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useAppSelector } from '@hooks/useAppDispatch';
-import Title from 'antd/es/skeleton/Title';
+
 import { ActionButton } from '@components/Button';
 import { DateConverter } from '@utils/converter/DateConverter';
 import { useDispatch } from 'react-redux';
@@ -48,7 +48,7 @@ const EventPage = () => {
     };
     const bookEvent = async () => {
         try {
-            const response = await axios({
+            await axios({
                 url: `http://localhost:8090/api/booking/${id}`,
                 method: 'POST',
                 headers: {
@@ -100,18 +100,20 @@ const EventPage = () => {
                             disabled={isBooked}
                         ></ActionButton>
                     ) : role === 'MANAGER' ? (
-                        <>
+                        <div className={styles.wrapper}>
                             <ActionButton
                                 title={'Редактировать'}
                                 type={'submit'}
-                                onClick={() => {}}
+                                onClick={() => {
+                                    navigate(`/edit/event/${id}`);
+                                }}
                             ></ActionButton>
                             <ActionButton
                                 title={'Отменить'}
                                 type={'submit'}
                                 onClick={() => {}}
                             ></ActionButton>
-                        </>
+                        </div>
                     ) : (
                         <></>
                     ))}

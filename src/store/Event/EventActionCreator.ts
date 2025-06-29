@@ -1,6 +1,6 @@
-import { useAppSelector } from "@hooks/useAppDispatch"
 import axios, { AxiosError } from "axios"
 import { setErrorCode, setEvents } from "./EventReducer"
+
 export const fetchEvents = () => async(dispatch: any) => {
     const token = localStorage.getItem('ACCESS_TOKEN');
     try {

@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
                         )}
                         {role == 'MANAGER' && (
                             <li className={style.navBar__listItem}>
-                                <Link to='/archive'>{'Арихив мероприятий'}</Link>
+                                <Link to='/history/event'>{'Архив мероприятий'}</Link>
                             </li>
                         )}
                         {role == 'CLIENT' && (
