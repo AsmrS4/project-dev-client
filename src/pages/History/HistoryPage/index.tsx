@@ -48,7 +48,6 @@ const HistoryPage = () => {
                     </>
                 )}
             </div>
-            <Filter />
         </section>
     );
 };
