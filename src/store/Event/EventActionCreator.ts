@@ -1,8 +1,9 @@
 import axios, { AxiosError } from "axios"
-import { setErrorCode, setEvents } from "./EventReducer"
+import { setErrorCode, setEvents, setLoading } from "./EventReducer"
 
 export const fetchEvents = () => async(dispatch: any) => {
     const token = localStorage.getItem('ACCESS_TOKEN');
+    dispatch(setLoading(true))
     try {
         const response = await axios({
             url: `${"http://localhost:8090/api"}/event`,
