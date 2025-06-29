@@ -15,6 +15,7 @@ import ArchivedEventPage from '@pages/ArchivedEvent';
 import HistoryPage from '@pages/History/HistoryPage';
 import CreateEventPage from '@pages/ModifyEvent/CreateEventPage';
 import EditEventPage from '@pages/ModifyEvent/EditEventPage';
+import CreateReviewPage from '@pages/Review';
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                     <Route path='/history'>
                         <Route path='/history/event' element={<HistoryPage />} />
                         <Route path='/history/event/:id' element={<ArchivedEventPage />} />
+                        <Route path='/history/event/review/:id' element={<CreateReviewPage />} />
                     </Route>
                     <Route path='/create/event' element={<CreateEventPage />} />
                     <Route path='/edit/event/:id' element={<EditEventPage />} />
