@@ -16,6 +16,7 @@ import HistoryPage from '@pages/History/HistoryPage';
 import CreateEventPage from '@pages/ModifyEvent/CreateEventPage';
 import EditEventPage from '@pages/ModifyEvent/EditEventPage';
 import CreateReviewPage from '@pages/Review';
+import GuestsPage from '@pages/GuestsPage';
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                         <Route path='/item/:id' element={<EventPage />} />
                         <Route path='/tickets' element={<ActiveTicketPage />} />
                         <Route path='/history/tickets' element={<ArhivedTicketPage />} />
+                        <Route path='/event/guests/:id' element={<GuestsPage />} />
                     </Route>
 
                     <Route path='/auth'>

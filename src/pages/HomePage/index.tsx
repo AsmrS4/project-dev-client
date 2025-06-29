@@ -36,18 +36,20 @@ const HomePage = () => {
                     </>
                 )}
             </div>
-            <div className={styles.wrapper}>
-                <Filter />
-                {role == 'MANAGER' && (
-                    <ActionButton
-                        title={'Создать мероприятие'}
-                        type={'button'}
-                        onClick={() => {
-                            navigate('/create/event');
-                        }}
-                    />
-                )}
-            </div>
+            {role != 'SECURITY' && (
+                <div className={styles.wrapper}>
+                    <Filter />
+                    {role == 'MANAGER' && (
+                        <ActionButton
+                            title={'Создать мероприятие'}
+                            type={'button'}
+                            onClick={() => {
+                                navigate('/create/event');
+                            }}
+                        />
+                    )}
+                </div>
+            )}
         </section>
     );
 };

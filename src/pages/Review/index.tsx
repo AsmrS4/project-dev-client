@@ -110,8 +110,16 @@ const CreateReviewPage = () => {
                 </div>
                 <TextAreaComp label={'Комментарий:'} value={description} onChange={handleDesc} />
             </EventForm>
-
-            <ActionButton title={'Создать'} type={'submit'} onClick={handleSubmit} />
+            <div className={styles.wrapper}>
+                <ActionButton
+                    title={'Назад'}
+                    type={'submit'}
+                    onClick={() => {
+                        navigate(-1);
+                    }}
+                />
+                <ActionButton title={'Отправить'} type={'submit'} onClick={handleSubmit} />
+            </div>
         </section>
     );
 };

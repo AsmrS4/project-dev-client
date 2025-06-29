@@ -1,10 +1,11 @@
-@import '@styles/index.scss';
-section.eventPage {
-    max-width: 600px;
+@import '@styles';
+
+.guestsPage {
+    max-width: 768px;
     width: 100%;
     min-height: 200px;
     height: auto;
-    max-height: 400px;
+
     padding: 30px;
     background-color: $bg-color;
     @include flex-column();
@@ -12,7 +13,7 @@ section.eventPage {
     box-sizing: border-box;
     margin: 0 auto;
     gap: 20px;
-    .eventHeader {
+    .pageHeader {
         @include flex-row();
         @include flex-justify-center();
         width: 100%;
@@ -26,24 +27,5 @@ section.eventPage {
             max-width: 200px;
             border-radius: 50px;
         }
-    }
-}
-
-.wrapper {
-    @include flex-row();
-    @include flex-justify-center();
-    width: 100%;
-    gap: 10px;
-    button {
-        padding: 0 20px;
-    }
-}
-
-.ratingWrapper {
-    width: 100%;
-    @include flex-row();
-    @include flex-justify-center();
-    label {
-        margin-left: 6px;
     }
 }
