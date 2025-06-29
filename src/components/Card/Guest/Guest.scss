@@ -1,0 +1,38 @@
+@import '@styles';
+
+.guestCard {
+    background-color: $white-color;
+    box-shadow: 0px 0px 2px 0px rgba(34, 60, 80, 0.2);
+    box-sizing: border-box;
+    padding: 20px 10px;
+    border-radius: 8px;
+    width: 100%;
+
+    height: 120px;
+    @include flex-row();
+    align-items: center;
+    gap: 30px;
+    .guestImage {
+        height: 100%;
+        img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+        }
+    }
+    .guestContent {
+        @include flex-column();
+        gap: 20px;
+        height: 100%;
+        .guestName {
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 0.02ch;
+        }
+        .guestRole {
+            font-size: 14px;
+            letter-spacing: 0.02ch;
+            color: rgb(89, 140, 12);
+        }
+    }
+}
