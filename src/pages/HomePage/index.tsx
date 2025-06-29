@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './HomePage.module.scss';
 import Filter from '@components/Filter';
 import EventCard from '@components/Card/Event';
@@ -9,11 +9,17 @@ import { useNavigate } from 'react-router-dom';
 import { clearSession } from '@store/User/AuthReducer';
 import EmptyAnswer from '@components/Message/Answer';
 import { ActionButton } from '@components/Button';
+import Field from '@components/Field/Input';
 const HomePage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
     const { isAuth, role } = useAppSelector((state) => state.authReducer);
+    const [searchText, setSearchText] = useState<string>('');
+    const [filteredEvents, setFilteredEvents] = useState(events);
     const dispatch: any = useDispatch();
     const navigate = useNavigate();
+    const handleSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchText(e.target.value);
+    };
     useEffect(() => {
         !isAuth ? navigate('/auth/sign-in') : dispatch(fetchEvents());
     }, [isAuth]);
@@ -22,12 +28,22 @@ const HomePage = () => {
             dispatch(clearSession());
             navigate('/auth/sign-in');
         }
-    });
+    }, []);
+    useEffect(() => {
+        setFilteredEvents(
+            searchText.trim() != ''
+                ? events.filter((event) =>
+                      event.title.toLowerCase().includes(searchText.toLowerCase()),
+                  )
+                : events,
+        );
+        console.log('filtered');
+    }, [searchText, events]);
     return (
         <section className={styles.homePage}>
             <div className={styles.eventContainer}>
-                {events && events.length > 0 ? (
-                    events.map((event) => {
+                {filteredEvents && filteredEvents.length > 0 ? (
+                    filteredEvents.map((event) => {
                         return <EventCard key={event.id} {...event} />;
                     })
                 ) : (
@@ -38,6 +54,11 @@ const HomePage = () => {
             </div>
             {role != 'SECURITY' && (
                 <div className={styles.wrapper}>
+                    <Field
+                        placeholder='Поиск по названию'
+                        value={searchText}
+                        onChange={handleSearchText}
+                    />
                     <Filter />
                     {role == 'MANAGER' && (
                         <ActionButton

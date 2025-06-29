@@ -7,12 +7,18 @@ import axios, { AxiosError } from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
+import Field from '@components/Field/Input';
 const GuestsPage = () => {
     const { id } = useParams();
     const [guests, setGuest] = useState<IGuestCard[]>([]);
     const { token, role } = useAppSelector((state) => state.authReducer);
+    const [searchText, setSearchText] = useState<string>('');
+    const [filteredGuests, setFilteredGuests] = useState(guests);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const handleSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchText(e.target.value);
+    };
     const fetchGuests = async () => {
         try {
             const response = await axios({
@@ -50,12 +56,27 @@ const GuestsPage = () => {
     useEffect(() => {
         fetchGuests();
     }, []);
+    useEffect(() => {
+        setFilteredGuests(
+            searchText.trim() != ''
+                ? guests.filter((guets) =>
+                      guets.fullName.toLowerCase().includes(searchText.toLowerCase()),
+                  )
+                : guests,
+        );
+        console.log('filtered');
+    }, [searchText, guests]);
     return (
         <section className='guestsPage'>
             <div className='pageHeader'>
                 <h1>Список гостей</h1>
+                <Field
+                    placeholder='Поиск по названию'
+                    value={searchText}
+                    onChange={handleSearchText}
+                />
             </div>
-            <GuestsList guests={guests} />
+            <GuestsList guests={filteredGuests} />
         </section>
     );
 };
