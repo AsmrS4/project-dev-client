@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../ErrorPage.module.scss';
 import died from '@assets/died.svg';
 import blowing from '@assets/blowing.svg';

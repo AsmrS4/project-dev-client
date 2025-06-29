@@ -1,4 +1,4 @@
-import { href, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import style from './Button.module.scss';
 
 interface ButtonProps {
@@ -15,7 +15,7 @@ interface ILinkButton {
 interface IActionButton {
     title: string;
     type: 'submit' | 'button' | 'reset';
-    onClick: () => void;
+    onClick: () => void | void;
     disabled?: boolean;
 }
 

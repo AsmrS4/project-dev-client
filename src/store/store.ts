@@ -3,10 +3,12 @@ import authSlice from './User/AuthReducer'
 import eventSlice from './Event/EventReducer'
 import ticketSlice from './Ticket/TicketReducer'
 import profileSlice from './User/ProfileReducer'
+import historySlice from './Event/History/HistoryEventReducer'
 
 const rootReducer = combineReducers({
     authReducer: authSlice,
     eventReducer: eventSlice,
+    historyReducer: historySlice,
     ticketReducer: ticketSlice,
     profileReducer: profileSlice
 })

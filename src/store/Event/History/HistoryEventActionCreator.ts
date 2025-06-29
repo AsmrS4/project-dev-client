@@ -1,11 +1,11 @@
 import axios, { AxiosError } from "axios"
-import { setErrorCode, setEvents } from "./EventReducer"
+import { setErrorCode, setEvents } from "./HistoryEventReducer"
 
-export const fetchEvents = () => async(dispatch: any) => {
+export const fetchHistoryEvents = () => async(dispatch: any) => {
     const token = localStorage.getItem('ACCESS_TOKEN');
     try {
         const response = await axios({
-            url: `${"http://localhost:8090/api"}/event`,
+            url: `${"http://localhost:8090/api"}/history/event`,
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`

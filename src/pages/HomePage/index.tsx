@@ -8,9 +8,10 @@ import { fetchEvents } from '@store/Event/EventActionCreator';
 import { useNavigate } from 'react-router-dom';
 import { clearSession } from '@store/User/AuthReducer';
 import EmptyAnswer from '@components/Message/Answer';
+import { ActionButton } from '@components/Button';
 const HomePage = () => {
     const { events, isLoading, code } = useAppSelector((state) => state.eventReducer);
-    const { isAuth } = useAppSelector((state) => state.authReducer);
+    const { isAuth, role } = useAppSelector((state) => state.authReducer);
     const dispatch: any = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -35,7 +36,18 @@ const HomePage = () => {
                     </>
                 )}
             </div>
-            <Filter />
+            <div className={styles.wrapper}>
+                <Filter />
+                {role == 'MANAGER' && (
+                    <ActionButton
+                        title={'Создать мероприятие'}
+                        type={'button'}
+                        onClick={() => {
+                            navigate('/create/event');
+                        }}
+                    />
+                )}
+            </div>
         </section>
     );
 };

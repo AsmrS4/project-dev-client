@@ -1,7 +1,7 @@
-import React from 'react';
 import styles from '../ErrorPage.module.scss';
 import img from '@assets/sad.svg';
 import { LinkButton } from '@components/Button';
+
 const NotFound = () => {
     return (
         <section className={styles.errorPage}>

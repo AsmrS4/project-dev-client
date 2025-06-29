@@ -1,0 +1,41 @@
+@import '@styles';
+
+.dateInput {
+    border-radius: 4px;
+    @include flex-column();
+    align-items: start;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+
+    .dateInput__label {
+        width: 100%;
+        height: auto;
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        margin: 4px 8px;
+    }
+
+    .dateInput__input {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 50px;
+        padding: 10px 15px;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 4px;
+        letter-spacing: 0.07cm;
+        background-color: $soft-light-gray-2;
+        &:enabled,
+        :focus {
+            border: none;
+            outline: 1.5px solid $soft-light-gray;
+        }
+        &::placeholder {
+            opacity: 0.4;
+        }
+    }
+}

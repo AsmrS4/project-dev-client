@@ -1,0 +1,37 @@
+@import '@styles/index.scss';
+section.eventPage {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    padding: 30px;
+    background-color: $bg-color;
+    @include flex-column();
+    @include flex-justify-center();
+    box-sizing: border-box;
+    margin: 0 auto;
+    gap: 20px;
+    .eventHeader {
+        @include flex-row();
+        @include flex-justify-center();
+        width: 100%;
+        .title,
+        h1 {
+            flex: 1;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        button {
+            max-width: 200px;
+            border-radius: 50px;
+        }
+    }
+}
+
+.wrapper {
+    @include flex-row();
+    @include flex-justify-center();
+    gap: 10px;
+    button {
+        padding: 0 20px;
+    }
+}

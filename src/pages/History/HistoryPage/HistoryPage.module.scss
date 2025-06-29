@@ -17,11 +17,4 @@
         flex: 1;
         margin: 0 20px;
     }
-    .wrapper {
-        max-height: 410px;
-        height: 100%;
-        width: 300px;
-        @include flex-column();
-        @include flex-justify-center();
-    }
 }

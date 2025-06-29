@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Profile.module.scss';
-import Form, { EditForm } from '@components/Form';
-import TextField from '@components/Field/TextField';
-import defaultAvatar from '@assets/userAvatar.jpg';
-import Button, { ActionButton } from '@components/Button';
-import { useAppSelector } from '@hooks/useAppDispatch';
-import axios, { AxiosError } from 'axios';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { clearSession } from '@store/User/AuthReducer';
-import ModalComponent from '@components/Modal';
-import type { ProfileProps } from 'src/models/Auth/Auth';
-import Message from '@components/Message';
 import { useNavigate } from 'react-router-dom';
+
+import { useAppSelector } from '@hooks/useAppDispatch';
+import ModalComponent from '@components/Modal';
+import Form from '@components/Form';
+import { ActionButton } from '@components/Button';
+import TextField from '@components/Field/TextField';
 import { fetchProfile } from '@store/User/ProfileAction';
+import { clearSession } from '@store/User/AuthReducer';
+
+import defaultAvatar from '@assets/userAvatar.jpg';
+import styles from './Profile.module.scss';
 
 const ProfilePage = () => {
     const { token } = useAppSelector((state) => state.authReducer);

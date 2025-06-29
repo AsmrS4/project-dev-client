@@ -11,7 +11,6 @@ import axios, { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { authorizeUser } from '@store/User/AuthActionCreators';
 import { useNavigate } from 'react-router-dom';
-import type { Dispatch } from '@reduxjs/toolkit';
 
 const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -27,7 +26,7 @@ const SignUp = () => {
 
     const registerUser = async (payload: IRegister) => {
         try {
-            const response = await axios({
+            await axios({
                 url: `${'http://localhost:8090/api'}/auth/sign-up`,
                 method: 'POST',
                 data: {
