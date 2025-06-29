@@ -57,7 +57,7 @@ const ProfilePage = () => {
                     </div>
                     <Form title={profile.fullName} onSubmit={() => {}} readonly={true}>
                         <TextField {...email} />
-                        <TextField {...phone} />
+                        {profile.phoneNumber != null && <TextField {...phone} />}
                         <ActionButton title='Редактировать' type='button' onClick={handleModal} />
                     </Form>
                 </div>

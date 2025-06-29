@@ -3,5 +3,7 @@ export interface IReview {
     eventId: string;
     content: string;
     rating: number;
+    fullName:string;
+    imageUrl: string | null
     createTime: any
 }

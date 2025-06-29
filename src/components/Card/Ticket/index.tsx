@@ -14,7 +14,7 @@ import { fetchTickets } from '@store/Ticket/TicketAction';
 const statuses = {
     ACTIVE: 'Активно',
     CANCELED: 'Отменено',
-    ARCHIVED: 'Посещено',
+    ARCHIVED: 'Прошло',
 };
 const TicketCard: React.FC<TicketProps> = ({ eventId, id, status }) => {
     const navigate = useNavigate();

@@ -8,9 +8,11 @@ import { useAppSelector } from '@hooks/useAppDispatch';
 import { DateConverter } from '@utils/converter/DateConverter';
 import { useDispatch } from 'react-redux';
 import { clearSession } from '@store/User/AuthReducer';
+import ReviewList from '@components/Reviews';
+import type { IReview } from 'src/models/Review';
 
 interface ReviewProps {
-    reviews: any[];
+    reviews: IReview[];
     totalRating: number;
 }
 
@@ -152,6 +154,7 @@ const ArhivedEventPage = () => {
                     </>
                 </div>
             </div>
+            <ReviewList reviews={reviews.reviews} />
         </section>
     );
 };

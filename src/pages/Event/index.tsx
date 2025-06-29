@@ -67,7 +67,8 @@ const EventPage = () => {
                     navigate('/error/forbidden');
                 }
                 if (error.response.status == 404) {
-                    navigate('/ddddd');
+                    console.log('here');
+                    navigate('*');
                 }
                 if (error.response.status == 500) {
                     navigate('/error/server');
@@ -87,11 +88,25 @@ const EventPage = () => {
             });
             checkHasBooking();
         } catch (error: unknown) {
-            if (error instanceof AxiosError && error.response && error.response.status == 401) {
-                dispatch(clearSession());
-                navigate('/auth/sign-in');
+            if (error instanceof AxiosError && error.response) {
+                if (error instanceof AxiosError && error.response) {
+                    if (error.response.status == 401) {
+                        dispatch(clearSession());
+                        navigate('/auth/sign-in');
+                    }
+                    if (error.response.status == 403) {
+                        navigate('/error/forbidden');
+                    }
+                    if (error.response.status == 404) {
+                        console.log('here');
+                        navigate('*');
+                    }
+                    if (error.response.status == 500) {
+                        navigate('/error/server');
+                    }
+                }
+                console.log(error);
             }
-            console.log(error);
         }
     };
     const fetchDetails = async () => {
@@ -105,9 +120,24 @@ const EventPage = () => {
             });
             setDetails(response.data);
         } catch (error: unknown) {
-            if (error instanceof AxiosError && error.response && error.response.status == 401) {
-                dispatch(clearSession());
-                navigate('/auth/sign-in');
+            if (error instanceof AxiosError && error.response) {
+                if (error instanceof AxiosError && error.response) {
+                    if (error.response.status == 401) {
+                        dispatch(clearSession());
+                        navigate('/auth/sign-in');
+                    }
+                    if (error.response.status == 403) {
+                        navigate('/error/forbidden');
+                    }
+                    if (error.response.status == 404) {
+                        console.log('here');
+                        navigate('*');
+                    }
+                    if (error.response.status == 500) {
+                        navigate('/error/server');
+                    }
+                }
+                console.log(error);
             }
             console.log(error);
         }

@@ -95,16 +95,16 @@ footer {
     border-top: 1px solid $soft-light-gray;
 }
 
-span.good {
+.good {
     background-color: rgb(249, 181, 35);
 }
-span.bad {
+.bad {
     background-color: rgb(223, 47, 47);
 }
-span.great {
+.great {
     background-color: rgb(9, 163, 9);
 }
 
-span.default {
+.default {
     background-color: $grey-color;
 }
