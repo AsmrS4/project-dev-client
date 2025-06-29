@@ -18,10 +18,12 @@
         margin: 0 20px;
     }
     .wrapper {
-        max-height: 410px;
+        max-height: 450px;
+
         height: 100%;
         width: 300px;
         @include flex-column();
-        @include flex-justify-center();
+        align-items: center;
+        gap: 20px;
     }
 }

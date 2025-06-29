@@ -2,7 +2,6 @@
 
 .guestsContainer {
     width: 100%;
-
     padding: 10px;
     @include flex-column();
     @include flex-all-center();
