@@ -1,0 +1,17 @@
+@import '@styles/index.scss';
+
+.guestsContainer {
+    width: 100%;
+
+    padding: 10px;
+    @include flex-column();
+    @include flex-all-center();
+}
+.guestsList {
+    width: 100%;
+    height: auto;
+    display: flex;
+    @include flex-column();
+    @include flex-justify-center();
+    gap: 8px;
+}
