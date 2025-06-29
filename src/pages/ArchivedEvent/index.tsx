@@ -103,6 +103,12 @@ const ArhivedEventPage = () => {
         }
     };
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }, []);
+    useEffect(() => {
         fetchDetails();
         fetchReviews();
         console.log(eventDetails);

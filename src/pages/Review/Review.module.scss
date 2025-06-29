@@ -2,8 +2,9 @@
 section.eventPage {
     max-width: 600px;
     width: 100%;
+    min-height: 200px;
     height: auto;
-    max-height: 500px;
+    max-height: 400px;
     padding: 30px;
     background-color: $bg-color;
     @include flex-column();
@@ -31,6 +32,7 @@ section.eventPage {
 .wrapper {
     @include flex-row();
     @include flex-justify-center();
+    width: 100%;
     gap: 10px;
     button {
         padding: 0 20px;

@@ -142,7 +142,12 @@ const EventPage = () => {
             console.log(error);
         }
     };
+
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
         fetchDetails();
         checkHasBooking();
         console.log(eventDetails);
@@ -176,6 +181,16 @@ const EventPage = () => {
                                 }}
                             ></ActionButton>
                         </div>
+                    ) : role === 'SECURITY' ? (
+                        <>
+                            <ActionButton
+                                title={'Список гостей'}
+                                type={'submit'}
+                                onClick={() => {
+                                    navigate(`/event/guests/${id}`);
+                                }}
+                            ></ActionButton>
+                        </>
                     ) : (
                         <></>
                     ))}
