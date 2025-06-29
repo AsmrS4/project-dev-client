@@ -1,7 +1,7 @@
 import style from '../Field.module.scss';
 
 interface InputProps {
-    label: string;
+    label?: string;
     type?: string | 'text';
     value: string | number | undefined;
     placeholder?: string | '';
@@ -14,9 +14,11 @@ const Field = (props: InputProps) => {
     };
     return (
         <div className={style.inputField}>
-            <label className={style.inputField__label} htmlFor=''>
-                {props.label}
-            </label>
+            {props.label && (
+                <label className={style.inputField__label} htmlFor=''>
+                    {props.label}
+                </label>
+            )}
             <input
                 type={props.type}
                 value={props.value}
