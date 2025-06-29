@@ -7,6 +7,10 @@
     border-radius: 8px;
     @include flex-row();
     @include flex-all-center();
+    @media (max-width: 480px) {
+        position: absolute;
+        opacity: 0;
+    }
     a {
         p {
             font-size: 20px;
