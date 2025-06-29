@@ -1,0 +1,67 @@
+@import '@styles';
+
+.reviewCard {
+    background-color: $white-color;
+    box-shadow: 0px 0px 2px 0px rgba(34, 60, 80, 0.2);
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    @include flex-column();
+    @include flex-justify-center();
+    .reviewTitle {
+        @include flex-row();
+        @include flex-justify-center();
+        width: 100%;
+        border-bottom: 1px solid $soft-light-gray;
+        .userWrapper {
+            @include flex-row();
+            @include flex-justify-center();
+            gap: 20px;
+            img {
+                height: 48px;
+                width: 48px;
+                border-radius: 50%;
+            }
+            .authorName {
+            }
+        }
+        .ratingWrapper {
+            @include flex-row();
+            @include flex-justify-center();
+            gap: 20px;
+            span {
+                margin: 0;
+            }
+            padding-right: 24px;
+            div {
+                width: 30px;
+                height: 20px;
+                margin: 0;
+                padding: 0;
+                padding-top: 2px;
+                text-align: center;
+                color: $white-color;
+                border-radius: 4px;
+                font-size: 14px;
+                font-weight: 700;
+            }
+        }
+    }
+    .reviewContent {
+        flex: 1;
+        box-sizing: border-box;
+        height: auto;
+        width: 100%;
+        padding: 10px 20px;
+        @include flex-column();
+        @include flex-all-center();
+        p {
+            margin: 0 10px;
+            width: 100%;
+            white-space: pre-wrap;
+            min-height: 40px;
+            box-sizing: border-box;
+        }
+    }
+}

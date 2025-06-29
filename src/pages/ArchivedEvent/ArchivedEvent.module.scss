@@ -23,6 +23,31 @@ section.eventPage {
             border-radius: 50px;
         }
     }
+    .carouselWrapper {
+        width: auto;
+        height: auto;
+        position: relative;
+        .rating {
+            width: 70px;
+            height: 50px;
+            border-radius: 6px;
+            margin: 8px;
+            overflow: hidden;
+            z-index: 1;
+            position: absolute;
+            @include flex-column();
+            @include flex-all-center();
+            span {
+                font-size: 20px;
+                font-weight: 500;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                padding-top: 12px;
+                color: $white-color;
+            }
+        }
+    }
     .eventContainer {
         width: 100%;
         height: 100%;

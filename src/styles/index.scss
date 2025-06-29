@@ -94,3 +94,17 @@ header {
 footer {
     border-top: 1px solid $soft-light-gray;
 }
+
+.good {
+    background-color: rgb(249, 181, 35);
+}
+.bad {
+    background-color: rgb(223, 47, 47);
+}
+.great {
+    background-color: rgb(9, 163, 9);
+}
+
+.default {
+    background-color: $grey-color;
+}

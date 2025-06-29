@@ -5,7 +5,7 @@ import { LinkButton } from '@components/Button';
 import { DateConverter } from '@utils/converter/DateConverter';
 import type { IEventCard } from 'src/models/Event/Event';
 
-const EventCard: React.FC<IEventCard> = ({ title, description, dateTime, id, images }) => {
+const EventCard: React.FC<IEventCard> = ({ title, status, dateTime, id, images }) => {
     const dateConverter: DateConverter = new DateConverter();
 
     return (
@@ -20,7 +20,11 @@ const EventCard: React.FC<IEventCard> = ({ title, description, dateTime, id, ima
                         Дата:{' '}
                         {dateConverter.convertToLocaleString(dateConverter.formattedDate(dateTime))}
                     </p>
-                    <LinkButton title={'Детали'} type='button' href={`/item/${id}`} />
+                    {status && status == 'ARCHIVED' ? (
+                        <LinkButton title={'Детали'} type='button' href={`/history/event/${id}`} />
+                    ) : (
+                        <LinkButton title={'Детали'} type='button' href={`/item/${id}`} />
+                    )}
                 </div>
             </div>
         </div>

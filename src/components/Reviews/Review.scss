@@ -1,0 +1,19 @@
+@import '@styles';
+.reviewsContainer {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    @include flex-column();
+    @include flex-all-center();
+    .containerTitle {
+        width: 100%;
+        font-weight: 500;
+    }
+    .reviewsList {
+        width: 100%;
+        height: auto;
+        @include flex-column();
+        @include flex-justify-center();
+        gap: 10px;
+    }
+}

@@ -14,7 +14,7 @@ import { fetchTickets } from '@store/Ticket/TicketAction';
 const statuses = {
     ACTIVE: 'Активно',
     CANCELED: 'Отменено',
-    ARCHIVED: 'Посещено',
+    ARCHIVED: 'Прошло',
 };
 const TicketCard: React.FC<TicketProps> = ({ eventId, id, status }) => {
     const navigate = useNavigate();
@@ -131,8 +131,9 @@ export const ArchivedTicketCard: React.FC<TicketProps> = ({ eventId, status }) =
         console.log(details);
     }, []);
     const onClick = async () => {
-        navigate(`/item/${eventId}`);
+        navigate(`/history/event/${eventId}`);
     };
+
     return (
         <div className={styles.ticketCard}>
             <div className={styles.ticketBody}>
@@ -142,11 +143,20 @@ export const ArchivedTicketCard: React.FC<TicketProps> = ({ eventId, status }) =
                     <p className={`${status.toLocaleLowerCase()}`}>{statuses[status]}</p>
                     <div className={styles.wrapper}>
                         {status == 'ARCHIVED' && (
-                            <ActionButton
-                                title='Оставить отзыв'
-                                type='button'
-                                onClick={onClick}
-                            ></ActionButton>
+                            <>
+                                <ActionButton
+                                    title='Детали'
+                                    type='button'
+                                    onClick={onClick}
+                                ></ActionButton>
+                                <ActionButton
+                                    title='Оценить'
+                                    type='button'
+                                    onClick={() => {
+                                        navigate(`/history/event/review/${eventId}`);
+                                    }}
+                                ></ActionButton>
+                            </>
                         )}
                     </div>
                 </div>
